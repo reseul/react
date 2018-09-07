@@ -1,7 +1,8 @@
 import { IGridVariables } from './gridVariables'
-import { IComponentPartStylesInput, ICSSInJSStyle, IProps } from '../../../../../types/theme'
+import { IComponentPartStylesInput, ICSSInJSStyle } from '../../../../../types/theme'
+import { GridTemplate, IGridProps } from '../../../../components/Grid/Grid'
 
-const getCSSTemplateValue = (template: string | number): string => {
+const getCSSTemplateValue = (template: GridTemplate): string => {
   const templateAsNumber = Number(template)
 
   return !isNaN(templateAsNumber) && templateAsNumber > 0
@@ -14,18 +15,29 @@ const gridStyles: IComponentPartStylesInput = {
     props,
     variables: { height, width, defaultColumnCount, gridGap, padding },
   }: {
-    props: IProps
+    props: IGridProps
     variables: IGridVariables
   }): ICSSInJSStyle => {
-    const { rows, columns = !props.rows && defaultColumnCount } = props
+    const {
+      alignContent,
+      alignItems,
+      gap = gridGap,
+      justifyContent,
+      justifyItems = 'space-evenly',
+      rows,
+      columns = !props.rows && defaultColumnCount,
+    } = props
 
-    const styles = {
+    const styles: ICSSInJSStyle = {
+      alignContent,
+      alignItems,
       height,
+      justifyContent,
+      justifyItems,
       width,
       padding,
-      gridGap,
       display: 'grid',
-      justifyContent: 'space-evenly',
+      gridGap: gap,
 
       ...(rows && !columns && { gridAutoFlow: 'column' }),
       ...(rows && { gridTemplateRows: getCSSTemplateValue(rows) }),

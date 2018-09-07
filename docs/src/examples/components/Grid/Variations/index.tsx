@@ -19,6 +19,11 @@ const Variations = () => (
       description="We can specify a certain amount of columns and rows or the explicit columns and rows for a grid."
       examplePath="components/Grid/Variations/GridExampleColumnsAndRows"
     />
+    <ComponentExample
+      title="Styling"
+      description="Supported Styling for Grid"
+      examplePath="components/Grid/Variations/GridExampleStyling"
+    />
   </ExampleSection>
 )
 

@@ -5,13 +5,22 @@ import { UIComponent, childrenExist, customPropTypes, IRenderResultConfig } from
 import { ComponentVariablesInput, IComponentPartStylesInput } from '../../../types/theme'
 import { Extendable, ItemShorthand, ReactChildren } from '../../../types/utils'
 
+export type GridTemplate = string | number
+export type ItemPosition = 'start' | 'end' | 'center' | 'stretch'
+export type ContentPosition = ItemPosition | 'space-around' | 'space-between' | 'space-evenly'
+
 export interface IGridProps {
+  alignContent?: ContentPosition
+  alignItems?: ItemPosition
   as?: any
   className?: string
   children?: ReactChildren
-  columns?: string | number
+  columns?: GridTemplate
   content?: ItemShorthand | ItemShorthand[]
-  rows?: string | number
+  gap?: string
+  justifyContent?: ContentPosition
+  justifyItems?: ItemPosition
+  rows?: GridTemplate
   styles?: IComponentPartStylesInput
   variables?: ComponentVariablesInput
 }
@@ -27,6 +36,20 @@ class Grid extends UIComponent<Extendable<IGridProps>, any> {
   public static className = 'ui-grid'
 
   public static propTypes = {
+    /** Aligns the grid along the block (column) */
+    alignContent: PropTypes.oneOf(['start', 'end', 'center', 'stretch']),
+
+    /** Aligns grid items along the block (column) */
+    alignItems: PropTypes.oneOf([
+      'start',
+      'end',
+      'center',
+      'stretch',
+      'space-around',
+      'space-between',
+      'space-evenly',
+    ]),
+
     /** An element type to render as (string or function). */
     as: customPropTypes.as,
 
@@ -48,6 +71,26 @@ class Grid extends UIComponent<Extendable<IGridProps>, any> {
       ]),
     ]),
 
+    /**
+     * Specifies the size of the grid lines. You can think of it like setting the width of the gutters between the columns/rows.
+     * gap="<row-gap> [<column-gap>]" if unspecified, <column-gap> will be <row-gap>
+     */
+    gap: PropTypes.string,
+
+    /** Aligns the grid along the inline (row) axis */
+    justifyContent: PropTypes.oneOf(['start', 'end', 'center', 'stretch']),
+
+    /** Aligns grid items along the inline (row) axis */
+    justifyItems: PropTypes.oneOf([
+      'start',
+      'end',
+      'center',
+      'stretch',
+      'space-around',
+      'space-between',
+      'space-evenly',
+    ]),
+
     /** The rows of the grid with a space-separated list of values. The values represent the track size, and the space between them represents the grid line. */
     rows: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 
@@ -59,11 +102,16 @@ class Grid extends UIComponent<Extendable<IGridProps>, any> {
   }
 
   public static handledProps = [
+    'alignContent',
+    'alignItems',
     'as',
     'children',
     'className',
     'columns',
     'content',
+    'gap',
+    'justifyContent',
+    'justifyItems',
     'rows',
     'styles',
     'variables',
