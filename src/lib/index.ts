@@ -2,6 +2,7 @@ import * as customPropTypes from './customPropTypes'
 
 export { default as AutoControlledComponent } from './AutoControlledComponent'
 export { default as childrenExist } from './childrenExist'
+export * from './colorUtils'
 export { default as UIComponent } from './UIComponent'
 export { EventStack } from './eventStack'
 export { felaRenderer, felaRtlRenderer } from './felaRenderer'

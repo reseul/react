@@ -14,6 +14,65 @@ import { Extendable, ObjectOf, ObjectOrFunc } from '../../types/utils'
 // Props
 // ========================================================
 
+/**
+ * A type for a palette for a single color.
+ */
+export type ColorVariants = {
+  50: string
+  100: string
+  200: string
+  300: string
+  400: string
+  500: string
+  600: string
+  700: string
+  800: string
+  900: string
+}
+
+/**
+ * A type for a predefined natural color palettes.
+ */
+export type NaturalColors = {
+  blue: ColorVariants
+  green: ColorVariants
+  grey: ColorVariants
+  orange: ColorVariants
+  pink: ColorVariants
+  purple: ColorVariants
+  teal: ColorVariants
+  red: ColorVariants
+  yellow: ColorVariants
+}
+
+/**
+ * A type for a predefined state color palettes.
+ */
+export type ContextualColors = {
+  primary: ColorVariants
+  secondary: ColorVariants
+  text: ColorVariants
+
+  danger: ColorVariants
+  info: ColorVariants
+  success: ColorVariants
+  warning: ColorVariants
+}
+
+/**
+ * A type for a base colors.
+ */
+export type PrimitiveColors = {
+  black: string
+  white: string
+}
+
+export type ColorPalette = NaturalColors & ContextualColors & PrimitiveColors
+
+// ========================================================
+// Props
+// ========================================================
+
 export type PropsWithVarsAndStyles = Extendable<{
   variables?: ComponentVariablesInput
   styles?: ComponentSlotStyle
@@ -30,11 +89,13 @@ export type State = ObjectOf<any>
 // ========================================================
 
 export interface SiteVariablesInput extends ObjectOf<any> {
+  colors?: ColorPalette
   brand?: string
   htmlFontSize?: string
 }
 
 export interface SiteVariablesPrepared extends ObjectOf<any> {
+  colors?: ColorPalette
   brand?: string
   htmlFontSize?: string
   fontSizes: ObjectOf<string>

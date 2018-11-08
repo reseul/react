@@ -125,7 +125,12 @@ export { default as dialogBehavior } from './lib/accessibility/Behaviors/Dialog/
 // Utilities
 //
 export { default as mergeThemes } from './lib/mergeThemes'
-export { createComponent } from './lib'
+export {
+  createComponent,
+  isSupportedColor,
+  unsupportedColor,
+  unsupportedColorVariants,
+} from './lib'
 export {
   RenderStardustResultConfig,
   CreateStardustComponentConfig,

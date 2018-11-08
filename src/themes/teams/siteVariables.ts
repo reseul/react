@@ -1,4 +1,5 @@
 import { pxToRem } from '../../lib'
+import { colors } from './colors'
 
 //
 // VARIABLES
@@ -8,7 +9,9 @@ export const htmlFontSize = '10px' // what 1rem represents
 //
 // COLORS
 //
-export const black = '#252423'
+export { colors } from './colors'
+
+export const black = colors.black
 export const gray02 = '#484644'
 export const gray03 = '#605E5C'
 export const gray04 = '#979593'
@@ -18,7 +21,7 @@ export const gray09 = '#EDEBE9'
 export const gray10 = '#F3F2F1'
 export const gray14 = '#FAF9F8'
 
-export const white = '#FFF'
+export const white = colors.white
 
 export const brand = '#6264A7'
 export const brand02 = '#33344A'

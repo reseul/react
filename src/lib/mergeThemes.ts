@@ -196,7 +196,21 @@ export const mergeStyles = (...sources: ComponentSlotStyle[]) => {
 
 const mergeThemes = (...themes: ThemeInput[]): ThemePrepared => {
   const emptyTheme = {
-    siteVariables: {},
+    siteVariables: {
+      colors: {
+        primary: {},
+        secondary: {},
+        blue: {},
+        green: {},
+        grey: {},
+        orange: {},
+        pink: {},
+        purple: {},
+        teal: {},
+        red: {},
+        yellow: {},
+      },
+    },
     componentVariables: {},
     componentStyles: {},
     fontFaces: [],
