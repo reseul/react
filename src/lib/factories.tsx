@@ -3,6 +3,7 @@ import * as cx from 'classnames'
 import * as React from 'react'
 import { ShorthandRenderFunction, ShorthandValue, Props } from '../../types/utils'
 import { mergeStyles } from './mergeThemes'
+import isElementTypeOfComponent from './isElementTypeOfComponent'
 
 type HTMLTag = 'iframe' | 'img' | 'input'
 type ShorthandProp = 'children' | 'src' | 'type'
@@ -55,6 +56,14 @@ export function createShorthand(
   const valIsPrimitive = typeof value === 'string' || typeof value === 'number'
   const valIsPropsObject = _.isPlainObject(value)
   const valIsReactElement = React.isValidElement(value)
+
+  // just return ReactElements that have different type than Component
+  if (
+    valIsReactElement &&
+    !isElementTypeOfComponent(value as React.ReactElement<Props>, Component)
+  ) {
+    return value as React.ReactElement<Props>
+  }
 
   // unhandled type warning
   if (

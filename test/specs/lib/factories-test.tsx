@@ -3,14 +3,14 @@ import * as _ from 'lodash'
 import { shallow } from 'enzyme'
 import { createShorthand, createShorthandFactory } from 'src/lib'
 import { Props, ShorthandValue, ObjectOf } from 'types/utils'
-import { consoleUtil } from 'test/utils'
+import { consoleUtil, createMockComponent } from 'test/utils'
 import callable from '../../../src/lib/callable'
 
 // ----------------------------------------
 // Utils
 // ----------------------------------------
 
-type GetShorthandArgs = {
+type ShorthandConfig = {
   Component?: React.ReactType
   defaultProps?: Props
   mappedProp?: string
@@ -31,7 +31,7 @@ const getShorthand = ({
   generateKey,
   value,
   render,
-}: GetShorthandArgs) =>
+}: ShorthandConfig) =>
   createShorthand(Component, mappedProp, value, {
     defaultProps,
     overrideProps,
@@ -42,7 +42,7 @@ const getShorthand = ({
 const isValuePrimitive = (value: ShorthandValue) =>
   typeof value === 'string' || typeof value === 'number'
 
-const testCreateShorthand = (shorthandArgs: GetShorthandArgs, expectedResult: ObjectOf<any>) =>
+const testCreateShorthand = (shorthandArgs: ShorthandConfig, expectedResult: ObjectOf<any>) =>
   expect(shallow(getShorthand(shorthandArgs)).props()).toEqual(expectedResult)
 
 // ----------------------------------------
@@ -111,7 +111,11 @@ const itMergesClassNames = (
   })
 }
 
-const itAppliesProps = (propsSource, expectedProps, shorthandConfig) => {
+const itAppliesProps = (
+  propsSource: string,
+  expectedProps: Props,
+  shorthandConfig: ShorthandConfig,
+) => {
   test(`applies props from the ${propsSource} props`, () => {
     testCreateShorthand(shorthandConfig, expectedProps)
   })
@@ -135,6 +139,48 @@ const itOverridesDefaultPropsWithFalseyProps = (propsSource, shorthandConfig) =>
     const expectedProps = { undef: undefined, nil: null, zero: 0, empty: '' }
 
     testCreateShorthand({ defaultProps, ...shorthandConfig }, expectedProps)
+  })
+}
+
+const itHandlesTheElementBasedOnComponentType = () => {
+  test('applies defaultProps, element props and overrideProps if element type is the same as the functional component', () => {
+    const MyComponent = createMockComponent('MyComponent')
+    testCreateShorthand(
+      {
+        Component: MyComponent,
+        value: MyComponent({ common: 'user', user: true }),
+        defaultProps: { common: 'default', default: true },
+        overrideProps: { common: 'override', override: true },
+      },
+      { common: 'override', user: true, default: true, override: true },
+    )
+  })
+
+  test('applies only the element props and forwards the element as is if element type is different than the primitive component', () => {
+    testCreateShorthand(
+      {
+        Component: 'p',
+        value: <span {...{ common: 'user', user: true } as any} />,
+        defaultProps: { common: 'default', default: true },
+        overrideProps: { common: 'override', override: true },
+      },
+      { common: 'user', user: true },
+    )
+  })
+
+  test('applies only the element props and forwards the element as is if element type is different than the functional component', () => {
+    const MyComponent = createMockComponent('MyComponent')
+    const OtherComponent = createMockComponent('OtherComponent')
+
+    testCreateShorthand(
+      {
+        Component: OtherComponent,
+        value: MyComponent({ common: 'user', user: true }),
+        defaultProps: { common: 'default', default: true },
+        overrideProps: { common: 'override', override: true },
+      },
+      { common: 'user', user: true },
+    )
   })
 }
 
@@ -530,6 +576,7 @@ describe('factories', () => {
       itOverridesDefaultPropsWithFalseyProps('element', {
         value: <div {...{ undef: undefined, nil: null, zero: 0, empty: '' } as any} />,
       })
+      itHandlesTheElementBasedOnComponentType()
     })
 
     describe('from a string', () => {
