@@ -2,7 +2,7 @@ import * as PropTypes from 'prop-types'
 import * as React from 'react'
 import { Icon } from '../../'
 
-import { customPropTypes, UIComponent, createShorthandFactory } from '../../lib'
+import { customPropTypes, UIComponent, createShorthandFactory, forwardRefFactory } from '../../lib'
 import { Extendable, ShorthandRenderFunction, ShorthandValue } from '../../../types/utils'
 import { UIComponentProps } from '../../lib/commonPropInterfaces'
 import { commonUIComponentPropTypes } from '../../lib/commonPropTypes'
@@ -30,9 +30,6 @@ export interface StatusProps extends UIComponentProps<any, any> {
   state?: 'success' | 'info' | 'warning' | 'error' | 'unknown'
 }
 
-/**
- * A status graphically represents someone's or something's state.
- */
 class Status extends UIComponent<Extendable<StatusProps>, any> {
   static create: Function
 
@@ -75,5 +72,9 @@ class Status extends UIComponent<Extendable<StatusProps>, any> {
 
 Status.create = createShorthandFactory(Status, 'state')
 
-export default Status
+/**
+ * A status graphically represents someone's or something's state.
+ */
+export default forwardRefFactory(Status)
+
 export type StatusPropsWithDefaults = StatusProps & typeof Status.defaultProps

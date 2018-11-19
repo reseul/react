@@ -1,5 +1,11 @@
 import * as customPropTypes from './customPropTypes'
 
+export {
+  forwardRefSymbol,
+  forwardRefFactory,
+  noForwardRefFactory,
+} from './forwardRefFactory/forwardRefFactories'
+
 export { default as AutoControlledComponent } from './AutoControlledComponent'
 export { default as childrenExist } from './childrenExist'
 export { default as UIComponent } from './UIComponent'
