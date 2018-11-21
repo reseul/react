@@ -4,6 +4,7 @@ import * as React from 'react'
 
 import Ref from '../../components/Ref/Ref'
 import { supportsRef } from './componentUtils'
+import * as _ from 'lodash'
 
 /**
  * Use just a string for now (react 16.6), since React doesn't support Symbols in props yet.
@@ -36,7 +37,7 @@ export const forwardFunctionFactory = <C extends React.ComponentType<P>, P exten
 }
 
 /**
- * Wraps a passed component with React.forwardRef(), which produce a new component. Also assigns (hoists) static methods
+ * Wraps a passed component with React.forwardRef() which produce a new component. Also assigns (hoists) static methods
  * of a passed component to a result component.
  * @param Component A component to wrap with forwardRef()
  */
@@ -49,7 +50,29 @@ export function forwardRefFactory<C extends React.ComponentType<P>, P extends { 
   return hoistNonReactStatics(ForwardedComponent, Component) as C
 }
 
+/**
+ * Wraps a passed component with React.forwardRef(), will warn a user about an unsupported `ref` prop.
+ * @param Component A component to wrap with forwardRef()
+ */
 export const noForwardRefFactory = <C extends React.ComponentType<P>, P>(Component: C): C => {
-  // TODO: WHERE IS LOGIC, SIR?
-  return Component
+  // Heads up!
+  // We use memoization to avoid tons of warnings.
+  const noRefSupport = _.memoize((show: boolean) => {
+    if (show) {
+      console.warn('Stardust UI: a "ref" prop is not supported by this component.')
+    }
+
+    return show
+  })
+
+  const ForwardedComponent = React.forwardRef<C>((props, ref) => {
+    if (process.env.NODE_ENV !== 'production') {
+      noRefSupport(!!ref)
+    }
+
+    // TODO: Resolve type error there
+    return React.createElement(Component, props as any)
+  })
+
+  return hoistNonReactStatics(ForwardedComponent, Component) as C
 }

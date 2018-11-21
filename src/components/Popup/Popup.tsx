@@ -10,6 +10,7 @@ import {
   EventStack,
   RenderResultConfig,
   isBrowser,
+  noForwardRefFactory,
 } from '../../lib'
 import { ComponentEventHandler, Extendable } from '../../../types/utils'
 
@@ -82,12 +83,7 @@ export interface PopupState {
   target: HTMLElement
 }
 
-/**
- * A Popup displays additional information on top of a page.
- * @accessibility This is example usage of the accessibility tag.
- * This should be replaced with the actual description after the PR is merged
- */
-export default class Popup extends AutoControlledComponent<Extendable<PopupProps>, PopupState> {
+class Popup extends AutoControlledComponent<Extendable<PopupProps>, PopupState> {
   public static displayName = 'Popup'
 
   public static className = 'ui-popup'
@@ -291,3 +287,10 @@ export default class Popup extends AutoControlledComponent<Extendable<PopupProps
     }
   }
 }
+
+/**
+ * A Popup displays additional information on top of a page.
+ * @accessibility This is example usage of the accessibility tag.
+ * This should be replaced with the actual description after the PR is merged
+ */
+export default noForwardRefFactory(Popup)
