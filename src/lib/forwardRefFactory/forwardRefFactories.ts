@@ -18,19 +18,24 @@ export const forwardRefSymbol = '__forwardRef__'
  */
 export const forwardFunctionFactory = <C extends React.ComponentType<P>, P extends { as?: any }>(
   Component: C,
-) => (props: P, ref: React.Ref<C>) => {
-  // TODO: Make correct comment
-  // The most simple case when `as='div'`
-  // This component supports ref forwarding!
-  // Magic happens there!
+) => (props, ref: React.Ref<C>) => {
+  // Heads up!
+  // We have the basic idea that all our components will be wrapped with `forwardRefFactory()`
+  // factory. This allows us to intercept a value `as` of prop because refs are passed to an
+  // `ElementType`.
+
+  // It's a complicated case, we have two ideas there:
+  // - if we don't have a value for the `as` prop, this means that we will use a value from
+  //   `defaultProps` or an `ElementType` will be `div` by default
+  // - if we received a value that supports ref forwarding it means that we can pass down a ref
+  //   and then it will be passed from unhandled props to a `ElementType`
   if (!props.as || supportsRef(props.as)) {
     return React.createElement(Component, Object.assign({}, props, { [forwardRefSymbol]: ref }))
   }
 
-  // TODO: Make correct comment
-  // Need to get ref manually
+  // In this case we're dealing with a functional or a class component and we should use our `Ref`
+  // component to determine a correct ref.
   return React.createElement(Ref, {
-    // TODO: Resolve type error there
     children: React.createElement(Component, props as any),
     innerRef: ref,
   })
@@ -65,13 +70,12 @@ export const noForwardRefFactory = <C extends React.ComponentType<P>, P>(Compone
     return show
   })
 
-  const ForwardedComponent = React.forwardRef<C>((props, ref) => {
+  const ForwardedComponent = React.forwardRef<C>((props: P, ref) => {
     if (process.env.NODE_ENV !== 'production') {
       noRefSupport(!!ref)
     }
 
-    // TODO: Resolve type error there
-    return React.createElement(Component, props as any)
+    return React.createElement(Component, props)
   })
 
   return hoistNonReactStatics(ForwardedComponent, Component) as C
