@@ -12,11 +12,16 @@ const getUnhandledProps = (Component: { handledProps: string[] }, props: Props) 
 
   return Object.keys(props).reduce(
     (acc, prop) => {
-      if (handledProps.indexOf(prop) === -1) acc[prop] = props[prop]
       // Heads up!
       // This condition is a part of the idea about `forwardRefFactory()`, while the factory adds
       // a ref prop in this function we assigning it back to unhandled props.
-      if (prop === forwardRefSymbol) acc.ref = props[forwardRefSymbol]
+      if (prop === forwardRefSymbol) {
+        acc.ref = props[forwardRefSymbol]
+
+        return acc
+      }
+
+      if (handledProps.indexOf(prop) === -1) acc[prop] = props[prop]
 
       return acc
     },
