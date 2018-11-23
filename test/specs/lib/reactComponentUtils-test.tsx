@@ -4,15 +4,13 @@ import { createMockComponent } from 'test/utils'
 
 describe('getComponentName', () => {
   it('returns null for invalid arguments', () => {
-     [undefined, null, '', {}].map(invalidArg =>
-      expect(getComponentName(invalidArg as any)).toBeFalsy(),
-    )
+    const invalidArgs = [undefined, null, '', {}]
+    invalidArgs.map(invalidArg => expect(getComponentName(invalidArg as any)).toBeFalsy())
   })
 
   it('returns the string component itself', () => {
-     ['div', 'span', 'MyComponent'].map(stringArg =>
-      expect(getComponentName(stringArg)).toEqual(stringArg),
-    )
+    const stringArgs = ['div', 'span', 'MyComponent']
+    stringArgs.map(stringArg => expect(getComponentName(stringArg)).toEqual(stringArg))
   })
 
   it('returns the function name', () => {
