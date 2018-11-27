@@ -30,15 +30,15 @@ const ColorPalette = () => (
             the best ideas from them.
           </p>
           <p>
-            An each theme should match our color palette types fully. This will allow you to use our
+            Each theme should match our color palette types fully. This will allow you to use our
             theming features completely and keep your palette structured.
           </p>
 
           <Header as="h2">Primitive colors</Header>
           <p>
             This part of the palette includes only <i>black</i> and <i>white</i> colors, we decided
-            to separate by semantical ideas. There are nothing more blacker than black and nothing
-            more whiter than white.
+            to separate by semantical ideas. There is nothing blacker than black and nothing whiter
+            than white.
           </p>
 
           <Grid columns={2}>
@@ -52,9 +52,9 @@ const ColorPalette = () => (
           <Header as="h2">Natural colors</Header>
           <p>
             This part of palette includes nine colors that are the most frequently used among
-            popular frameworks. Each color includes ten gradients, this allows to satisfy all common
-            needs. This decisition expirienced from Material UI and allows to define more variants
-            than semantical naming (lightest, lighter, etc.).
+            popular frameworks. Each color includes ten gradients, this allows us to satisfy most
+            common needs. This decision is experienced from Material UI and allows to define more
+            variants than semantical naming (lightest, lighter, etc.).
           </p>
 
           <Grid columns={2}>
