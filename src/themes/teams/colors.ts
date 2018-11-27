@@ -1,4 +1,3 @@
-import { unsupportedColor } from '../../lib'
 import { ColorPalette } from '../types'
 
 export const colors: ColorPalette = {
@@ -7,7 +6,6 @@ export const colors: ColorPalette = {
   white: '#FFF',
 
   // Natural colors
-  blue: unsupportedColor('blue'),
   green: {
     50: '#E7F2D9',
     100: '#DFEECD',
@@ -80,7 +78,6 @@ export const colors: ColorPalette = {
     800: '#A1CC6B',
     900: '#92C353',
   },
-  teal: unsupportedColor('teal'),
   yellow: {
     50: '#FEF5D0',
     100: '#FDF1BE',
@@ -107,7 +104,6 @@ export const colors: ColorPalette = {
     800: '#414265',
     900: '#33344A',
   },
-  secondary: unsupportedColor('secondary'),
   text: {
     50: '#E7F2D9',
     100: '#DFEECD',

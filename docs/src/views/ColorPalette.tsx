@@ -7,7 +7,6 @@ import { Grid, Header, Segment } from 'semantic-ui-react'
 import ColorBox, { colorBoxStyles, colorBoxVariables } from 'docs/src/components/ColorBox'
 import ColorVariants, { colorVariantsStyles } from 'docs/src/components/ColorVariants'
 import DocPage from 'docs/src/components/DocPage/DocPage'
-import { isSupportedColor } from '../../../src/lib'
 
 const naturalColors = ['blue', 'green', 'grey', 'orange', 'pink', 'purple', 'teal', 'red', 'yellow']
 
@@ -59,10 +58,6 @@ const ColorPalette = () => (
             needs. This decisition expirienced from Material UI and allows to define more variants
             than semantical naming (lightest, lighter, etc.).
           </p>
-          <p>
-            You can mark some colors and gradients as unsupported by <code>unsupportedColor()</code>{' '}
-            and <code>unsupportedColorVariants()</code> utils.
-          </p>
 
           <Grid columns={3}>
             {_.map(naturalColors, color => (
@@ -70,8 +65,8 @@ const ColorPalette = () => (
                 <ColorBox
                   name={color}
                   rounded
-                  supported={isSupportedColor(colors[color])}
-                  value={colors[color][500]}
+                  supported={!!colors[color]}
+                  value={_.get(colors, [color, 500])}
                 />
               </Grid.Column>
             ))}
@@ -90,8 +85,8 @@ const ColorPalette = () => (
                   name={color}
                   rounded
                   size="big"
-                  supported={isSupportedColor(colors[color])}
-                  value={colors[color][500]}
+                  supported={!!colors[color]}
+                  value={_.get(colors, [color, 500])}
                 />
               </Grid.Column>
             ))}
@@ -115,7 +110,7 @@ const ColorPalette = () => (
           <Grid columns={3}>
             {_.map(naturalColors, color => (
               <Grid.Column key={color}>
-                <ColorVariants name={color} supported={isSupportedColor(colors[color])} />
+                <ColorVariants name={color} supported={!!colors[color]} />
               </Grid.Column>
             ))}
           </Grid>

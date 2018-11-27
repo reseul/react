@@ -24,7 +24,12 @@ const ColorVariants = createComponent<ColorVariantsProps>({
     <ProviderConsumer
       render={({ siteVariables: { colors } }) => (
         <div className={classes.root}>
-          <ColorBox name={name} size="big" supported={supported} value={colors[name][500]} />
+          <ColorBox
+            name={name}
+            size="big"
+            supported={supported}
+            value={_.get(colors, [name, 500])}
+          />
 
           {supported &&
             _.map(colors[name], (value, variable) => (

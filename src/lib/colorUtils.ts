@@ -1,10 +1,5 @@
 import * as Color from 'color'
-import * as _ from 'lodash'
-
-import { ColorPalette, ColorVariants } from '../themes/types'
-
-const MOCK_COLOR = 'red'
-const MOCK_PROPERTY = '[[UNSUPPORTED_COLOR]]'
+import { ColorVariants } from '../themes/types'
 
 export const setColorLightness = (base: string, value: number) =>
   Color(base)
@@ -24,34 +19,3 @@ export const createPalette = (base: string): ColorVariants => ({
   800: setColorLightness(base, 80),
   900: setColorLightness(base, 90),
 })
-
-const unsupportedHandler = (baseColor: string, mockColor: string): ProxyHandler<ColorVariants> => {
-  const warning = _.memoize((variant: string): string => {
-    console.warn(
-      `You're trying to access an unsupported variant (${variant}) of "${baseColor}" color.`,
-    )
-
-    return mockColor
-  })
-
-  return {
-    get: (target: ColorVariants, prop: string) => {
-      const emptyValues = Object.keys(target).length === 0
-
-      if (prop === MOCK_PROPERTY) return emptyValues
-      return target[prop] || warning(prop as string)
-    },
-  }
-}
-
-export const isSupportedColor = (value: ColorVariants): boolean => value && !value[MOCK_PROPERTY]
-
-export const unsupportedColorVariants = (
-  color: keyof ColorPalette,
-  supportedVariants: Partial<ColorVariants> = {},
-  mockColor: string = MOCK_COLOR,
-): ColorVariants =>
-  new Proxy<ColorVariants>(supportedVariants as ColorVariants, unsupportedHandler(color, mockColor))
-
-export const unsupportedColor = (color: keyof ColorPalette, mockColor: string = MOCK_COLOR) =>
-  unsupportedColorVariants(color, undefined, mockColor)

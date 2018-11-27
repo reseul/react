@@ -34,29 +34,29 @@ export type ColorVariants = {
  * A type for a predefined natural color palettes.
  */
 export type NaturalColors = {
-  blue: ColorVariants
-  green: ColorVariants
-  grey: ColorVariants
-  orange: ColorVariants
-  pink: ColorVariants
-  purple: ColorVariants
-  teal: ColorVariants
-  red: ColorVariants
-  yellow: ColorVariants
+  blue?: ColorVariants
+  green?: ColorVariants
+  grey?: ColorVariants
+  orange?: ColorVariants
+  pink?: ColorVariants
+  purple?: ColorVariants
+  teal?: ColorVariants
+  red?: ColorVariants
+  yellow?: ColorVariants
 }
 
 /**
  * A type for a predefined state color palettes.
  */
 export type ContextualColors = {
-  primary: ColorVariants
-  secondary: ColorVariants
-  text: ColorVariants
+  primary?: ColorVariants
+  secondary?: ColorVariants
+  text?: ColorVariants
 
-  danger: ColorVariants
-  info: ColorVariants
-  success: ColorVariants
-  warning: ColorVariants
+  danger?: ColorVariants
+  info?: ColorVariants
+  success?: ColorVariants
+  warning?: ColorVariants
 }
 
 /**
