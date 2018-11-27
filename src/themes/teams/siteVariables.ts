@@ -9,7 +9,7 @@ export const htmlFontSize = '10px' // what 1rem represents
 //
 // COLORS
 //
-export { colors, contextualColors, emphasisColors, naturalColors } from './colors'
+export { additionalColors, colors, contextualColors, emphasisColors, naturalColors } from './colors'
 
 export const black = colors.black
 export const gray02 = '#484644'
@@ -23,14 +23,14 @@ export const gray14 = '#FAF9F8'
 
 export const white = colors.white
 
-export const brand = '#6264A7'
-export const brand02 = '#33344A'
+export const brand = colors.primary[500]
+export const brand02 = colors.primary[900]
 export const brand04 = '#464775'
-export const brand06 = '#6264A7'
+export const brand06 = colors.primary[500]
 export const brand08 = '#8B8CC7'
-export const brand12 = '#BDBDE6'
-export const brand14 = '#E2E2F6'
-export const brand16 = '#F4F4FC'
+export const brand12 = colors.primary[200]
+export const brand14 = colors.primary[100]
+export const brand16 = colors.primary[50]
 
 export const orange04 = '#CC4A31'
 export const magenta = '#B24782'
