@@ -1,4 +1,68 @@
-import { ColorPalette, EmphasisColors, NaturalColors } from '../types'
+import { ColorPalette, ContextualColors, EmphasisColors, NaturalColors } from '../types'
+
+export const contextualColors: ContextualColors = {
+  text: {
+    50: '#E7F2D9',
+    100: '#DFEECD',
+    200: '#D8EAC1',
+    300: '#CDE3B0',
+    400: '#C6DFA4',
+    500: '#BDDB96',
+    600: '#B4D689',
+    700: '#ACD17B',
+    800: '#A1CC6B',
+    900: '#92C353',
+  },
+
+  danger: {
+    50: '#E7F2D9',
+    100: '#DFEECD',
+    200: '#D8EAC1',
+    300: '#CDE3B0',
+    400: '#C6DFA4',
+    500: '#BDDB96',
+    600: '#B4D689',
+    700: '#ACD17B',
+    800: '#A1CC6B',
+    900: '#92C353',
+  },
+  info: {
+    50: '#E7F2D9',
+    100: '#DFEECD',
+    200: '#D8EAC1',
+    300: '#CDE3B0',
+    400: '#C6DFA4',
+    500: '#BDDB96',
+    600: '#B4D689',
+    700: '#ACD17B',
+    800: '#A1CC6B',
+    900: '#92C353',
+  },
+  success: {
+    50: '#E7F2D9',
+    100: '#DFEECD',
+    200: '#D8EAC1',
+    300: '#CDE3B0',
+    400: '#C6DFA4',
+    500: '#BDDB96',
+    600: '#B4D689',
+    700: '#ACD17B',
+    800: '#A1CC6B',
+    900: '#92C353',
+  },
+  warning: {
+    50: '#E7F2D9',
+    100: '#DFEECD',
+    200: '#D8EAC1',
+    300: '#CDE3B0',
+    400: '#C6DFA4',
+    500: '#BDDB96',
+    600: '#B4D689',
+    700: '#ACD17B',
+    800: '#A1CC6B',
+    900: '#92C353',
+  },
+}
 
 export const emphasisColors: EmphasisColors = {
   primary: {
@@ -103,72 +167,11 @@ export const naturalColors: NaturalColors = {
 }
 
 export const colors: ColorPalette = {
+  ...contextualColors,
   ...emphasisColors,
   ...naturalColors,
 
   // Primitive colors
   black: '#252423',
   white: '#FFF',
-
-  text: {
-    50: '#E7F2D9',
-    100: '#DFEECD',
-    200: '#D8EAC1',
-    300: '#CDE3B0',
-    400: '#C6DFA4',
-    500: '#BDDB96',
-    600: '#B4D689',
-    700: '#ACD17B',
-    800: '#A1CC6B',
-    900: '#92C353',
-  },
-
-  danger: {
-    50: '#E7F2D9',
-    100: '#DFEECD',
-    200: '#D8EAC1',
-    300: '#CDE3B0',
-    400: '#C6DFA4',
-    500: '#BDDB96',
-    600: '#B4D689',
-    700: '#ACD17B',
-    800: '#A1CC6B',
-    900: '#92C353',
-  },
-  info: {
-    50: '#E7F2D9',
-    100: '#DFEECD',
-    200: '#D8EAC1',
-    300: '#CDE3B0',
-    400: '#C6DFA4',
-    500: '#BDDB96',
-    600: '#B4D689',
-    700: '#ACD17B',
-    800: '#A1CC6B',
-    900: '#92C353',
-  },
-  success: {
-    50: '#E7F2D9',
-    100: '#DFEECD',
-    200: '#D8EAC1',
-    300: '#CDE3B0',
-    400: '#C6DFA4',
-    500: '#BDDB96',
-    600: '#B4D689',
-    700: '#ACD17B',
-    800: '#A1CC6B',
-    900: '#92C353',
-  },
-  warning: {
-    50: '#E7F2D9',
-    100: '#DFEECD',
-    200: '#D8EAC1',
-    300: '#CDE3B0',
-    400: '#C6DFA4',
-    500: '#BDDB96',
-    600: '#B4D689',
-    700: '#ACD17B',
-    800: '#A1CC6B',
-    900: '#92C353',
-  },
 }

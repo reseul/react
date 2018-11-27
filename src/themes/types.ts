@@ -102,6 +102,7 @@ export type State = ObjectOf<any>
 export interface SiteVariablesInput extends ObjectOf<any> {
   colors?: ColorPalette
   additionalColors?: AdditionalColors
+  contextualColors?: ContextualColors
   emphasisColors?: EmphasisColors
   naturalColors?: NaturalColors
   brand?: string
@@ -111,6 +112,7 @@ export interface SiteVariablesInput extends ObjectOf<any> {
 export interface SiteVariablesPrepared extends ObjectOf<any> {
   colors?: ColorPalette
   additionalColors?: AdditionalColors
+  contextualColors?: ContextualColors
   emphasisColors?: EmphasisColors
   naturalColors?: NaturalColors
   brand?: string

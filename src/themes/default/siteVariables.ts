@@ -1,1 +1,1 @@
-export { colors, emphasisColors, naturalColors } from './colors'
+export { colors, contextualColors, emphasisColors, naturalColors } from './colors'

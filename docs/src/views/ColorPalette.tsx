@@ -21,7 +21,7 @@ const ColorPalette = () => (
     }}
   >
     <ProviderConsumer
-      render={({ siteVariables: { colors, emphasisColors, naturalColors } }) => (
+      render={({ siteVariables: { colors, contextualColors, emphasisColors, naturalColors } }) => (
         <DocPage title="Color Palette">
           <Header as="h2">Introduction</Header>
           <p>
@@ -72,7 +72,7 @@ const ColorPalette = () => (
           </p>
 
           <Grid columns={2}>
-            {_.map(naturalColors, (variants, color) => (
+            {_.map({ ...emphasisColors, ...contextualColors }, (variants, color) => (
               <Grid.Column key={color}>
                 <ColorBox name={color} rounded size="big" value={colors[color][500]} />
               </Grid.Column>
@@ -95,11 +95,14 @@ const ColorPalette = () => (
 
           <Header as="h2">Color variables</Header>
           <Grid columns={2}>
-            {_.map({ ...emphasisColors, ...naturalColors }, (variants, color) => (
-              <Grid.Column key={color}>
-                <ColorVariants name={color} />
-              </Grid.Column>
-            ))}
+            {_.map(
+              { ...emphasisColors, ...contextualColors, ...naturalColors },
+              (variants, color) => (
+                <Grid.Column key={color}>
+                  <ColorVariants name={color} />
+                </Grid.Column>
+              ),
+            )}
           </Grid>
         </DocPage>
       )}
