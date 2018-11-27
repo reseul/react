@@ -1,11 +1,21 @@
-import { ColorPalette } from '../types'
+import { ColorPalette, EmphasisColors, NaturalColors } from '../types'
 
-export const colors: ColorPalette = {
-  // Primitive colors
-  black: '#252423',
-  white: '#FFF',
+export const emphasisColors: EmphasisColors = {
+  primary: {
+    50: '#F4F4FC',
+    100: '#E2E2F6',
+    200: '#BDBDE6',
+    300: '#8F90C1',
+    400: '#6E70AE',
+    500: '#6264A7',
+    600: '#55578D',
+    700: '#4A4C78',
+    800: '#414265',
+    900: '#33344A',
+  },
+}
 
-  // Natural colors
+export const naturalColors: NaturalColors = {
   green: {
     50: '#E7F2D9',
     100: '#DFEECD',
@@ -90,20 +100,16 @@ export const colors: ColorPalette = {
     800: '#F9D844',
     900: '#F8D22A',
   },
+}
 
-  // Functional colors
-  primary: {
-    50: '#F4F4FC',
-    100: '#E2E2F6',
-    200: '#BDBDE6',
-    300: '#8F90C1',
-    400: '#6E70AE',
-    500: '#6264A7',
-    600: '#55578D',
-    700: '#4A4C78',
-    800: '#414265',
-    900: '#33344A',
-  },
+export const colors: ColorPalette = {
+  ...emphasisColors,
+  ...naturalColors,
+
+  // Primitive colors
+  black: '#252423',
+  white: '#FFF',
+
   text: {
     50: '#E7F2D9',
     100: '#DFEECD',

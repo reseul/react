@@ -7,7 +7,6 @@ import ColorBox from './ColorBox'
 
 type ColorVariantsProps = {
   name: string
-  supported?: boolean
 }
 
 export const colorVariantsStyles: ComponentSlotStylesInput<ColorVariantsProps> = {
@@ -20,29 +19,19 @@ export const colorVariantsStyles: ComponentSlotStylesInput<ColorVariantsProps> =
 
 const ColorVariants = createComponent<ColorVariantsProps>({
   displayName: 'ColorVariants',
-  render: ({ name, supported, stardust: { classes } }) => (
+  render: ({ name, stardust: { classes } }) => (
     <ProviderConsumer
       render={({ siteVariables: { colors } }) => (
         <div className={classes.root}>
-          <ColorBox
-            name={name}
-            size="big"
-            supported={supported}
-            value={_.get(colors, [name, 500])}
-          />
+          <ColorBox name={name} size="big" value={colors[name][500]} />
 
-          {supported &&
-            _.map(colors[name], (value, variable) => (
-              <ColorBox key={variable} name={variable} size="small" value={value} />
-            ))}
+          {_.map(colors[name], (value, variable) => (
+            <ColorBox key={variable} name={variable} size="small" value={value} />
+          ))}
         </div>
       )}
     />
   ),
 })
-
-ColorVariants.defaultProps = {
-  supported: true,
-}
 
 export default ColorVariants

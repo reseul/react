@@ -1,5 +1,5 @@
 import { createPalette } from '../../lib'
-import { ColorPalette, NaturalColors } from '../types'
+import { ColorPalette, EmphasisColors, NaturalColors } from '../types'
 
 export const naturalColors: NaturalColors = {
   blue: createPalette('#0a84ff'),
@@ -13,14 +13,18 @@ export const naturalColors: NaturalColors = {
   yellow: createPalette('#ffe900'),
 }
 
+export const emphasisColors: EmphasisColors = {
+  primary: createPalette('#0a84ff'),
+  secondary: naturalColors.grey,
+}
+
 export const colors: ColorPalette = {
+  ...emphasisColors,
+  ...naturalColors,
+
   black: '#000',
   white: '#fff',
 
-  ...naturalColors,
-
-  primary: createPalette('#0a84ff'),
-  secondary: naturalColors.grey,
   text: naturalColors.grey,
 
   info: naturalColors.blue,

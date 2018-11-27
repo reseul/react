@@ -31,43 +31,54 @@ export type ColorVariants = {
 }
 
 /**
- * A type for a predefined natural color palettes.
+ * A type for a additional colors.
  */
-export type NaturalColors = {
-  blue?: ColorVariants
-  green?: ColorVariants
-  grey?: ColorVariants
-  orange?: ColorVariants
-  pink?: ColorVariants
-  purple?: ColorVariants
-  teal?: ColorVariants
-  red?: ColorVariants
-  yellow?: ColorVariants
-}
+export type AdditionalColors = ObjectOf<ColorVariants>
 
 /**
- * A type for a predefined state color palettes.
+ * A type for a predefined natural colors.
  */
-export type ContextualColors = {
-  primary?: ColorVariants
-  secondary?: ColorVariants
-  text?: ColorVariants
+export type NaturalColors = Partial<{
+  blue: ColorVariants
+  green: ColorVariants
+  grey: ColorVariants
+  orange: ColorVariants
+  pink: ColorVariants
+  purple: ColorVariants
+  teal: ColorVariants
+  red: ColorVariants
+  yellow: ColorVariants
+}>
 
-  danger?: ColorVariants
-  info?: ColorVariants
-  success?: ColorVariants
-  warning?: ColorVariants
-}
+/**
+ * A type for a predefined state colors.
+ */
+export type ContextualColors = Partial<{
+  text: ColorVariants
+
+  danger: ColorVariants
+  info: ColorVariants
+  success: ColorVariants
+  warning: ColorVariants
+}>
+
+/**
+ * A type for a predefined emphasis colors.
+ */
+export type EmphasisColors = Partial<{
+  primary: ColorVariants
+  secondary: ColorVariants
+}>
 
 /**
  * A type for a base colors.
  */
-export type PrimitiveColors = {
-  black?: string
-  white?: string
-}
+export type PrimitiveColors = Partial<{
+  black: string
+  white: string
+}>
 
-export type ColorPalette = NaturalColors & ContextualColors & PrimitiveColors
+export type ColorPalette = EmphasisColors & NaturalColors & ContextualColors & PrimitiveColors
 
 // ========================================================
 // Props
@@ -90,12 +101,18 @@ export type State = ObjectOf<any>
 
 export interface SiteVariablesInput extends ObjectOf<any> {
   colors?: ColorPalette
+  additionalColors?: AdditionalColors
+  emphasisColors?: EmphasisColors
+  naturalColors?: NaturalColors
   brand?: string
   htmlFontSize?: string
 }
 
 export interface SiteVariablesPrepared extends ObjectOf<any> {
   colors?: ColorPalette
+  additionalColors?: AdditionalColors
+  emphasisColors?: EmphasisColors
+  naturalColors?: NaturalColors
   brand?: string
   htmlFontSize?: string
   fontSizes: ObjectOf<string>

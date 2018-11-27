@@ -8,8 +8,6 @@ import ColorBox, { colorBoxStyles, colorBoxVariables } from 'docs/src/components
 import ColorVariants, { colorVariantsStyles } from 'docs/src/components/ColorVariants'
 import DocPage from 'docs/src/components/DocPage/DocPage'
 
-const naturalColors = ['blue', 'green', 'grey', 'orange', 'pink', 'purple', 'teal', 'red', 'yellow']
-
 const ColorPalette = () => (
   <Provider
     theme={{
@@ -23,7 +21,7 @@ const ColorPalette = () => (
     }}
   >
     <ProviderConsumer
-      render={({ siteVariables: { colors } }) => (
+      render={({ siteVariables: { colors, emphasisColors, naturalColors } }) => (
         <DocPage title="Color Palette">
           <Header as="h2">Introduction</Header>
           <p>
@@ -59,15 +57,10 @@ const ColorPalette = () => (
             than semantical naming (lightest, lighter, etc.).
           </p>
 
-          <Grid columns={3}>
-            {_.map(naturalColors, color => (
+          <Grid columns={2}>
+            {_.map(naturalColors, (variants, color) => (
               <Grid.Column key={color}>
-                <ColorBox
-                  name={color}
-                  rounded
-                  supported={!!colors[color]}
-                  value={_.get(colors, [color, 500])}
-                />
+                <ColorBox name={color} rounded value={colors[color][500]} />
               </Grid.Column>
             ))}
           </Grid>
@@ -79,15 +72,9 @@ const ColorPalette = () => (
           </p>
 
           <Grid columns={2}>
-            {_.map(['primary', 'secondary', 'danger', 'success', 'info', 'warning'], color => (
+            {_.map(naturalColors, (variants, color) => (
               <Grid.Column key={color}>
-                <ColorBox
-                  name={color}
-                  rounded
-                  size="big"
-                  supported={!!colors[color]}
-                  value={_.get(colors, [color, 500])}
-                />
+                <ColorBox name={color} rounded size="big" value={colors[color][500]} />
               </Grid.Column>
             ))}
           </Grid>
@@ -107,10 +94,10 @@ const ColorPalette = () => (
           </Segment>
 
           <Header as="h2">Color variables</Header>
-          <Grid columns={3}>
-            {_.map(naturalColors, color => (
+          <Grid columns={2}>
+            {_.map({ ...emphasisColors, ...naturalColors }, (variants, color) => (
               <Grid.Column key={color}>
-                <ColorVariants name={color} supported={!!colors[color]} />
+                <ColorVariants name={color} />
               </Grid.Column>
             ))}
           </Grid>
