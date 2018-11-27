@@ -67,8 +67,8 @@ const ColorPalette = () => (
 
           <Header as="h2">Contextual colors</Header>
           <p>
-            This part of the palette includes primary and secondary (i.e. brand) colors and state
-            colors. State colors can be just aliases for natural colors.
+            This part of the palette includes primary and secondary (i.e. brand) colors and
+            contextual colors. Contextual colors can be just aliases for natural colors.
           </p>
 
           <Grid columns={2}>
