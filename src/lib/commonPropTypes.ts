@@ -17,6 +17,22 @@ export const commonUIComponentPropTypes = {
   className: PropTypes.string,
 }
 
+export const colorComponentPropsTypes = {
+  color: PropTypes.oneOf([
+    'primary',
+    'secondary',
+    'blue',
+    'green',
+    'grey',
+    'orange',
+    'pink',
+    'purple',
+    'teal',
+    'red',
+    'yellow',
+  ]),
+}
+
 export const contentComponentPropsTypes = {
   content: customPropTypes.contentShorthand,
 }

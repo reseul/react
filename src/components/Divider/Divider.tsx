@@ -6,32 +6,21 @@ import { Extendable } from '../../../types/utils'
 import {
   UIComponentProps,
   ChildrenComponentProps,
+  ColorComponentProps,
   ContentComponentProps,
 } from '../../lib/commonPropInterfaces'
 import {
   commonUIComponentPropTypes,
   childrenComponentPropTypes,
+  colorComponentPropsTypes,
   contentComponentPropsTypes,
 } from '../../lib/commonPropTypes'
 
 export interface DividerProps
   extends UIComponentProps<any, any>,
     ChildrenComponentProps,
+    ColorComponentProps,
     ContentComponentProps {
-  /** A divider can have color. */
-  color?:
-    | 'primary'
-    | 'secondary'
-    | 'blue'
-    | 'green'
-    | 'grey'
-    | 'orange'
-    | 'pink'
-    | 'purple'
-    | 'teal'
-    | 'red'
-    | 'yellow'
-
   /** A divider can be fitted, without any space above or below it.  */
   fitted?: boolean
 
@@ -58,20 +47,8 @@ class Divider extends UIComponent<Extendable<DividerProps>, any> {
   static propTypes = {
     ...commonUIComponentPropTypes,
     ...childrenComponentPropTypes,
+    ...colorComponentPropsTypes,
     ...contentComponentPropsTypes,
-    color: PropTypes.oneOf([
-      'primary',
-      'secondary',
-      'blue',
-      'green',
-      'grey',
-      'orange',
-      'pink',
-      'purple',
-      'teal',
-      'red',
-      'yellow',
-    ]),
     fitted: PropTypes.bool,
     size: PropTypes.number,
     type: PropTypes.oneOf(['primary', 'secondary']),

@@ -22,6 +22,22 @@ export interface UIComponentProps<P, V> extends StyledComponentProps<P, V>, Anim
   className?: string
 }
 
+export interface ColorComponentProps {
+  /** A component can have a color. */
+  color?:
+    | 'primary'
+    | 'secondary'
+    | 'blue'
+    | 'green'
+    | 'grey'
+    | 'orange'
+    | 'pink'
+    | 'purple'
+    | 'teal'
+    | 'red'
+    | 'yellow'
+}
+
 export interface ContentComponentProps {
   /** Shorthand for primary content. */
   content?: ShorthandValue
