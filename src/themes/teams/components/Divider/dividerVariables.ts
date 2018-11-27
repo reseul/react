@@ -1,3 +1,4 @@
+import * as _ from 'lodash'
 import { pxToRem } from '../../../../lib'
 
 export interface DividerVariables {
@@ -25,14 +26,14 @@ export interface DividerVariables {
 export default (siteVars: any): DividerVariables => {
   return {
     colors: {
-      primary: siteVars.colors.primary[500],
-      green: siteVars.colors.green[500],
-      grey: siteVars.colors.grey[500],
-      orange: siteVars.colors.orange[500],
-      pink: siteVars.colors.pink[500],
-      purple: siteVars.colors.purple[500],
-      red: siteVars.colors.red[500],
-      yellow: siteVars.colors.yellow[500],
+      primary: _.get(siteVars.colors, ['primary', 500]),
+      green: _.get(siteVars.colors, ['green', 500]),
+      grey: _.get(siteVars.colors, ['grey', 500]),
+      orange: _.get(siteVars.colors, ['orange', 500]),
+      pink: _.get(siteVars.colors, ['pink', 500]),
+      purple: _.get(siteVars.colors, ['purple', 500]),
+      red: _.get(siteVars.colors, ['red', 500]),
+      yellow: _.get(siteVars.colors, ['yellow', 500]),
     },
     dividerColor: siteVars.gray09,
     textColor: siteVars.gray03,

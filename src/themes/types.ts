@@ -63,8 +63,8 @@ export type ContextualColors = {
  * A type for a base colors.
  */
 export type PrimitiveColors = {
-  black: string
-  white: string
+  black?: string
+  white?: string
 }
 
 export type ColorPalette = NaturalColors & ContextualColors & PrimitiveColors

@@ -2,12 +2,25 @@ import _ from 'lodash'
 import React from 'react'
 import { Divider, ProviderConsumer } from '@stardust-ui/react'
 
+const colors = [
+  'primary',
+  'secondary',
+  'blue',
+  'green',
+  'grey',
+  'orange',
+  'pink',
+  'purple',
+  'teal',
+  'red',
+  'yellow',
+]
+
 const DividerExampleSize = () => (
   <ProviderConsumer
-    render={({ siteVariables: { colors } }) =>
-      _.map(colors, (variants, name) => (
-        <Divider key={name} color={name as any} content={_.startCase(name)} />
-      ))
+    // render={({ siteVariables: { colors } }) =>
+    render={() =>
+      _.map(colors, name => <Divider key={name} color={name as any} content={_.startCase(name)} />)
     }
   />
 )
