@@ -10,7 +10,7 @@ const { __DEV__ } = config.compiler_globals
 const webpackConfig: any = {
   mode: __DEV__ ? 'development' : 'production',
   entry: {
-    app: paths.sampleSrc('index'),
+    app: paths.simpleSrc('index'),
     vendor: config.compiler_vendor,
   },
   devtool: 'inline-source-map',
@@ -26,7 +26,7 @@ const webpackConfig: any = {
         exclude: /node_modules/,
         options: {
           useCache: true,
-          configFileName: paths.base('build/tsconfig.sample.json'),
+          configFileName: paths.base('build/tsconfig.simple.json'),
           errorsAsWarnings: __DEV__,
         },
       },
@@ -49,7 +49,7 @@ const webpackConfig: any = {
     alias: {
       '@stardust-ui/react': paths.src(),
       src: paths.src(),
-      docs: paths.base('sample'),
+      docs: paths.base('simple'),
       'package.json': paths.base('package.json'),
     },
   },
@@ -62,7 +62,7 @@ const webpackConfig: any = {
   ],
   output: {
     filename: 'index.js',
-    path: config.compiler_sample_output_path,
+    path: config.compiler_simple_output_path,
     pathinfo: true,
     publicPath: config.compiler_public_path,
   },

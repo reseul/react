@@ -16,16 +16,16 @@ const { colors, log, PluginError } = g.util
 // Clean
 // ----------------------------------------
 
-task('clean:sample', cb => {
-  rimraf(paths.sampleDist(), cb)
+task('clean:simple', cb => {
+  rimraf(paths.simpleDist(), cb)
 })
 
 // ----------------------------------------s
 // Build
 // ----------------------------------------
 
-task('build:sample', cb => {
-  const webpackConfig = require('../../webpack.config.sample').default
+task('build:simple', cb => {
+  const webpackConfig = require('../../webpack.config.simple').default
   const compiler = webpack(webpackConfig)
 
   compiler.run((err, stats) => {
@@ -53,9 +53,9 @@ task('build:sample', cb => {
 // Serve
 // ----------------------------------------
 
-task('serve:sample', cb => {
+task('serve:simple', cb => {
   const app = express()
-  const webpackConfig = require('../../webpack.config.sample').default
+  const webpackConfig = require('../../webpack.config.simple').default
   const compiler = webpack(webpackConfig)
 
   app
@@ -68,7 +68,7 @@ task('serve:sample', cb => {
     .use(
       WebpackDevMiddleware(compiler, {
         publicPath: webpackConfig.output.publicPath,
-        contentBase: paths.sampleSrc(),
+        contentBase: paths.simpleSrc(),
         hot: true,
         quiet: false,
         noInfo: true, // must be quiet for hot middleware to show overlay
@@ -79,13 +79,13 @@ task('serve:sample', cb => {
 
     .use(WebpackHotMiddleware(compiler))
 
-    .use(express.static(paths.sampleDist()))
+    .use(express.static(paths.simpleDist()))
 
-    .listen(config.sample_server_port, config.server_host, () => {
+    .listen(config.simple_server_port, config.server_host, () => {
       log(
-        colors.yellow('Server for Sample running at http://%s:%d'),
+        colors.yellow('Server for Simple Sample running at http://%s:%d'),
         config.server_host,
-        config.sample_server_port,
+        config.simple_server_port,
       )
       cb()
     })
@@ -95,4 +95,4 @@ task('serve:sample', cb => {
 // Default
 // ----------------------------------------
 
-task('sample', series('build:sample', 'serve:sample'))
+task('simple', series('build:simple', 'serve:simple'))

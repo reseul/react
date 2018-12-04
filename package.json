@@ -14,7 +14,7 @@
     "build": "gulp build",
     "build:docs": "gulp --series dll build:docs",
     "build:dist": "gulp --series build:dist",
-    "build:sample": "gulp --series dll build:sample",
+    "build:simple": "gulp --series dll build:sample",
     "ci": "yarn lint && yarn prettier && yarn test --strict",
     "predeploy:docs": "cross-env NODE_ENV=production yarn build:docs",
     "deploy:docs": "gulp deploy:docs",
@@ -31,7 +31,8 @@
     "release:minor": "yarn prerelease && ta-script npm/release minor && yarn postrelease",
     "release:patch": "yarn prerelease && ta-script npm/release patch && yarn postrelease",
     "prestart": "yarn satisfied --fix yarn",
-    "start": "gulp --series dll docs sample",
+    "start": "gulp --series dll docs simple",
+    "start-ios": "node node_modules/react-native/local-cli/cli.js start",
     "satisfied": "satisfied --skip-invalid",
     "pretest": "yarn satisfied",
     "test": "gulp test",
@@ -79,7 +80,7 @@
       "docs/(.*)$": "<rootDir>/docs/$1",
       "src/(.*)$": "<rootDir>/src/$1",
       "test/(.*)$": "<rootDir>/test/$1",
-      "sample/(.*)$": "<rootDir>/sample/$1"
+      "simple/(.*)$": "<rootDir>/simple/$1"
     }
   },
   "dependencies": {
@@ -151,7 +152,7 @@
     "normalize.css": "^8.0.0",
     "prettier": "1.15.3",
     "raw-loader": "^0.5.1",
-    "react": "^16.0.0",
+    "react": "16.3.1",
     "react-ace": "^5.1.2",
     "react-custom-scrollbars": "^4.2.1",
     "react-docgen-typescript": "^1.12.0",
@@ -159,6 +160,7 @@
     "react-dom": "^16.0.0",
     "react-element-to-jsx-string": "14.0.2",
     "react-hot-loader": "^4.1.3",
+    "react-native": "^0.55.0",
     "react-router": "^4.1.2",
     "react-router-dom": "^4.1.2",
     "react-source-render": "2.0.0-beta.4",

@@ -22,8 +22,8 @@ const envConfig = {
   dir_docs_dist: 'docs/dist',
   dir_docs_src: 'docs/src',
   dir_umd_dist: 'dist/umd',
-  dir_sample_dist: 'sample/dist',
-  dir_sample_src: 'sample/src',
+  dir_simple_dist: 'simple/dist',
+  dir_simple_src: 'simple/src',
 }
 
 // ------------------------------------
@@ -39,8 +39,8 @@ const paths = {
   docsDist: base.bind(null, envConfig.dir_docs_dist),
   docsSrc: base.bind(null, envConfig.dir_docs_src),
   umdDist: base.bind(null, envConfig.dir_umd_dist),
-  sampleDist: base.bind(null, envConfig.dir_sample_dist),
-  sampleSrc: base.bind(null, envConfig.dir_sample_src),
+  simpleDist: base.bind(null, envConfig.dir_simple_dist),
+  simpleSrc: base.bind(null, envConfig.dir_simple_src),
   withRootAt: (root, ...subpaths) => (...args) => path.resolve(root, ...subpaths, ...args),
   posix: undefined, // all the sibling values, but with forward slashes regardless the OS
 }
@@ -56,7 +56,7 @@ const config = {
   // ----------------------------------
   server_host: 'localhost',
   server_port: process.env.PORT || 8080,
-  sample_server_port: 8081,
+  simple_server_port: 8081,
 
   // ----------------------------------
   // Compiler Configuration
@@ -73,7 +73,7 @@ const config = {
   },
   compiler_hash_type: __PROD__ ? 'chunkhash' : 'hash',
   compiler_output_path: paths.base(envConfig.dir_docs_dist),
-  compiler_sample_output_path: paths.base(envConfig.dir_sample_dist),
+  compiler_simple_output_path: paths.base(envConfig.dir_simple_dist),
   compiler_public_path: __BASENAME__,
   compiler_stats: {
     hash: false, // the hash of the compilation
