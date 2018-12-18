@@ -95,4 +95,4 @@ task('serve:simple', cb => {
 // Default
 // ----------------------------------------
 
-task('simple', series('build:simple', 'serve:simple'))
+task('simple', series('clean:simple', 'build:simple', 'serve:simple'))

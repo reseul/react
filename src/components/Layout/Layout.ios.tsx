@@ -1,15 +1,13 @@
 import * as React from 'react'
 import * as RN from 'react-native'
 import * as PropTypes from 'prop-types'
-import * as cx from 'classnames'
+import cx from 'classnames'
 
-import { UIComponent } from '../../lib'
+import { UIComponent, UIComponentProps, commonPropTypes } from '../../lib'
 import { Extendable } from '../../../types/utils'
 import { ICSSInJSStyle } from '../../themes/types'
-import { UIComponentProps } from '../../lib/commonPropInterfaces'
-import { commonUIComponentPropTypes } from '../../lib/commonPropTypes'
 
-export interface LayoutProps extends UIComponentProps<any, any> {
+export interface LayoutProps extends UIComponentProps {
   debug?: boolean
   renderStartArea?: (params: object) => React.ReactNode
   renderMainArea?: (params: object) => React.ReactNode
@@ -51,7 +49,10 @@ class Layout extends UIComponent<Extendable<LayoutProps>, any> {
   static displayName = 'Layout'
 
   static propTypes = {
-    ...commonUIComponentPropTypes,
+    ...commonPropTypes.createCommon({
+      children: false,
+      content: false,
+    }),
     debug: PropTypes.bool,
 
     renderStartArea: PropTypes.func,
@@ -96,21 +97,39 @@ class Layout extends UIComponent<Extendable<LayoutProps>, any> {
     // TODO: when an area is another Layout, do not wrap them in an extra div
     // TODO: option 1) higher value layouts could use start={Layout.create(start)} to ensure Areas are layout root
     renderStartArea({ start, classes }) {
-      return start && <RN.View className={cx('ui-layout__start', classes.start)} style={ classes.start }>{start}</RN.View>
+      return (
+        start && (
+          <RN.View className={cx('ui-layout__start', classes.start)} style={classes.start}>
+            {start}
+          </RN.View>
+        )
+      )
     },
 
     renderMainArea({ main, classes }) {
-      return main && <RN.View className={cx('ui-layout__main', classes.main)} style={ classes.main } >{main}</RN.View>
+      return (
+        main && (
+          <RN.View className={cx('ui-layout__main', classes.main)} style={classes.main}>
+            {main}
+          </RN.View>
+        )
+      )
     },
 
     renderEndArea({ end, classes }) {
-      return end && <RN.View className={cx('ui-layout__end', classes.end)}  style={ classes.end }>{end}</RN.View>
+      return (
+        end && (
+          <RN.View className={cx('ui-layout__end', classes.end)} style={classes.end}>
+            {end}
+          </RN.View>
+        )
+      )
     },
 
     // Heads up!
     // IE11 Doesn't support grid-gap, insert virtual columns instead
     renderGap({ gap, classes }) {
-      return gap && <span className={cx('ui-layout__gap', classes.gap)}  style={ classes.gap }/>
+      return gap && <span className={cx('ui-layout__gap', classes.gap)} />
     },
   }
 

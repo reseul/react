@@ -1,4 +1,4 @@
-//import * as cx from 'classnames'
+// import * as cx from 'classnames'
 import * as React from 'react'
 import * as _ from 'lodash'
 import { FelaTheme } from 'react-fela'
@@ -121,7 +121,7 @@ const renderWithFocusZone = (render, focusZoneDefinition, config, focusZoneRef):
 
 const renderComponent = <P extends {}>(config: RenderConfig<P>): React.ReactElement<P> => {
   const {
-//    className,
+    //    className,
     defaultProps,
     displayName,
     handledProps,
@@ -168,7 +168,7 @@ const renderComponent = <P extends {}>(config: RenderConfig<P>): React.ReactElem
           },
         )
         const accessibility: AccessibilityBehavior = getAccessibility(stateAndProps, actionHandlers)
-        var rest = getUnhandledProps(
+        let rest = getUnhandledProps(
           { handledProps: [...handledProps, ...accessibility.handledProps] },
           props,
         )
@@ -189,11 +189,11 @@ const renderComponent = <P extends {}>(config: RenderConfig<P>): React.ReactElem
         )
 
         const classes: ComponentSlotClasses = getClasses(renderer, mergedStyles, styleParam)
-        //classes.root = cx(className, classes.root, props.className)
+        // classes.root = cx(className, classes.root, props.className)
 
         rest = {
           ...rest,
-          style: classes.root
+          style: classes.root,
         }
 
         const config: RenderResultConfig<P> = {

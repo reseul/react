@@ -1,7 +1,7 @@
 import * as _ from 'lodash'
 import cx from 'classnames'
 import * as React from 'react'
-import * as RN from "react-native"
+import * as RN from 'react-native'
 import {
   ShorthandValue,
   Props,

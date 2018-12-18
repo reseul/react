@@ -1,131 +1,131 @@
 import { remToPx } from './fontSizeUtility'
 
 const validStyles = [
-  "alignContent",
-  "alignItems",
-  "alignSelf",
-  "aspectRatio",
-  "backfaceVisibility",
-  "backgroundColor",
-  "borderBottomColor",
-  "borderBottomEndRadius",
-  "borderBottomLeftRadius",
-  "borderBottomRightRadius",
-  "borderBottomStartRadius",
-  "borderBottomWidth",
-  "borderColor",
-  "borderEndColor",
-  "borderEndWidth",
-  "borderLeftColor",
-  "borderLeftWidth",
-  "borderRadius",
-  "borderRightColor",
-  "borderRightWidth",
-  "borderStartColor",
-  "borderStartWidth",
-  "borderStyle",
-  "borderTopColor",
-  "borderTopEndRadius",
-  "borderTopLeftRadius",
-  "borderTopRightRadius",
-  "borderTopStartRadius",
-  "borderTopWidth",
-  "borderWidth",
-  "bottom",
-  "color",
-  "decomposedMatrix",
-  "direction",
-  "display",
-  "elevation",
-  "end",
-  "flex",
-  "flexBasis",
-  "flexDirection",
-  "flexGrow",
-  "flexShrink",
-  "flexWrap",
-  "fontFamily",
-  "fontSize",
-  "fontStyle",
-  "fontVariant",
-  "fontWeight",
-  "height",
-  "includeFontPadding",
-  "justifyContent",
-  "left",
-  "letterSpacing",
-  "lineHeight",
-  "margin",
-  "marginBottom",
-  "marginEnd",
-  "marginHorizontal",
-  "marginLeft",
-  "marginRight",
-  "marginStart",
-  "marginTop",
-  "marginVertical",
-  "maxHeight",
-  "maxWidth",
-  "minHeight",
-  "minWidth",
-  "opacity",
-  "overflow",
-  "overlayColor",
-  "padding",
-  "paddingBottom",
-  "paddingEnd",
-  "paddingHorizontal",
-  "paddingLeft",
-  "paddingRight",
-  "paddingStart",
-  "paddingTop",
-  "paddingVertical",
-  "position",
-  "resizeMode",
-  "right",
-  "rotation",
-  "scaleX",
-  "scaleY",
-  "shadowColor",
-  "shadowOffset",
-  "shadowOpacity",
-  "shadowRadius",
-  "start",
-  "textAlign",
-  "textAlignVertical",
-  "textDecorationColor",
-  "textDecorationLine",
-  "textDecorationStyle",
-  "textShadowColor",
-  "textShadowOffset",
-  "textShadowRadius",
-  "tintColor",
-  "top",
-  "transform",
-  "transformMatrix",
-  "translateX",
-  "translateY",
-  "width",
-  "writingDirection",
-  "zIndex"
+  'alignContent',
+  'alignItems',
+  'alignSelf',
+  'aspectRatio',
+  'backfaceVisibility',
+  'backgroundColor',
+  'borderBottomColor',
+  'borderBottomEndRadius',
+  'borderBottomLeftRadius',
+  'borderBottomRightRadius',
+  'borderBottomStartRadius',
+  'borderBottomWidth',
+  'borderColor',
+  'borderEndColor',
+  'borderEndWidth',
+  'borderLeftColor',
+  'borderLeftWidth',
+  'borderRadius',
+  'borderRightColor',
+  'borderRightWidth',
+  'borderStartColor',
+  'borderStartWidth',
+  'borderStyle',
+  'borderTopColor',
+  'borderTopEndRadius',
+  'borderTopLeftRadius',
+  'borderTopRightRadius',
+  'borderTopStartRadius',
+  'borderTopWidth',
+  'borderWidth',
+  'bottom',
+  'color',
+  'decomposedMatrix',
+  'direction',
+  'display',
+  'elevation',
+  'end',
+  'flex',
+  'flexBasis',
+  'flexDirection',
+  'flexGrow',
+  'flexShrink',
+  'flexWrap',
+  'fontFamily',
+  'fontSize',
+  'fontStyle',
+  'fontVariant',
+  'fontWeight',
+  'height',
+  'includeFontPadding',
+  'justifyContent',
+  'left',
+  'letterSpacing',
+  'lineHeight',
+  'margin',
+  'marginBottom',
+  'marginEnd',
+  'marginHorizontal',
+  'marginLeft',
+  'marginRight',
+  'marginStart',
+  'marginTop',
+  'marginVertical',
+  'maxHeight',
+  'maxWidth',
+  'minHeight',
+  'minWidth',
+  'opacity',
+  'overflow',
+  'overlayColor',
+  'padding',
+  'paddingBottom',
+  'paddingEnd',
+  'paddingHorizontal',
+  'paddingLeft',
+  'paddingRight',
+  'paddingStart',
+  'paddingTop',
+  'paddingVertical',
+  'position',
+  'resizeMode',
+  'right',
+  'rotation',
+  'scaleX',
+  'scaleY',
+  'shadowColor',
+  'shadowOffset',
+  'shadowOpacity',
+  'shadowRadius',
+  'start',
+  'textAlign',
+  'textAlignVertical',
+  'textDecorationColor',
+  'textDecorationLine',
+  'textDecorationStyle',
+  'textShadowColor',
+  'textShadowOffset',
+  'textShadowRadius',
+  'tintColor',
+  'top',
+  'transform',
+  'transformMatrix',
+  'translateX',
+  'translateY',
+  'width',
+  'writingDirection',
+  'zIndex',
 ]
 
 const stylesToBeNumberified = [
-  "borderRadius",
-  "borderWidth",
-  "height",
-  "width",
-  "maxWidth",
-  "minWidth",
-  "marginLeft",
-  "marginRight",
-  "marginTop",
-  "marginBottom",
-  "paddingLeft",
-  "paddingRight",
-  "paddingTop",
-  "paddingBottom",
-  "fontSize",
+  'borderRadius',
+  'borderWidth',
+  'height',
+  'width',
+  'maxWidth',
+  'minWidth',
+  'marginLeft',
+  'marginRight',
+  'marginTop',
+  'marginBottom',
+  'paddingLeft',
+  'paddingRight',
+  'paddingTop',
+  'paddingBottom',
+  'fontSize',
 ]
 
 /**
@@ -172,12 +172,13 @@ export default (config?: { skip?: string[] }) => {
     const processedStyles = {}
 
     Object.keys(styles).forEach(cssPropertyName => {
-
       // Skip some names
-      if (cssPropertyName === '::placeholder' ||
-          cssPropertyName === ':focus' ||
-          cssPropertyName === ':hover' ||
-          cssPropertyName[0] === '&' ) {
+      if (
+        cssPropertyName === '::placeholder' ||
+        cssPropertyName === ':focus' ||
+        cssPropertyName === ':hover' ||
+        cssPropertyName[0] === '&'
+      ) {
         return
       }
 
@@ -192,12 +193,15 @@ export default (config?: { skip?: string[] }) => {
         propToExclude => propToExclude === cssPropertyName,
       )
       if (isPropertyToSkip || isValidCssValue(cssPropertyValue)) {
-
         // iOS processing
 
         // 'display: inline-flex' and others should be 'display: flex', as a workaround
-        if (cssPropertyName === 'display' &&
-          (cssPropertyValue === 'inline-flex' || cssPropertyValue === 'block' || cssPropertyValue === 'inline-block')) {
+        if (
+          cssPropertyName === 'display' &&
+          (cssPropertyValue === 'inline-flex' ||
+            cssPropertyValue === 'block' ||
+            cssPropertyValue === 'inline-block')
+        ) {
           cssPropertyValue = 'flex'
         }
 
@@ -219,14 +223,20 @@ export default (config?: { skip?: string[] }) => {
         }
 
         // Numberifying
-        if (stylesToBeNumberified.some(
-          styleToBeNumberified => styleToBeNumberified === cssPropertyName
-        ) && typeof cssPropertyValue === 'string') {
+        if (
+          stylesToBeNumberified.some(
+            styleToBeNumberified => styleToBeNumberified === cssPropertyName,
+          ) &&
+          typeof cssPropertyValue === 'string'
+        ) {
           cssPropertyValue = remToPx(cssPropertyValue)
         }
 
         // Margin and padding
-        if ((cssPropertyName === 'padding' || cssPropertyName === 'margin') && typeof cssPropertyValue === 'string') {
+        if (
+          (cssPropertyName === 'padding' || cssPropertyName === 'margin') &&
+          typeof cssPropertyValue === 'string'
+        ) {
           const parts = cssPropertyValue.split(' ')
           if (parts.length === 4) {
             processedStyles[cssPropertyName + 'Left'] = remToPx(parts[0])
@@ -237,14 +247,11 @@ export default (config?: { skip?: string[] }) => {
           }
         }
 
-        const validStyle = validStyles.some(
-          style => style === cssPropertyName
-        )
+        const validStyle = validStyles.some(style => style === cssPropertyName)
 
         if (validStyle) {
           processedStyles[cssPropertyName] = cssPropertyValue
         } else {
-          ;
         }
       }
     })
@@ -256,34 +263,33 @@ export default (config?: { skip?: string[] }) => {
 }
 
 // Polypolyfill the __assign so we allow "falsy" elements
-var __DEV__ = true
+const __DEV__ = true
 
-Object.assign = function(target, sources) {
+Object.assign = function (target, sources) {
   if (__DEV__) {
     if (target == null) {
-      throw new TypeError('Object.assign target cannot be null or undefined');
+      throw new TypeError('Object.assign target cannot be null or undefined')
     }
     if (typeof target !== 'object' && typeof target !== 'function') {
       throw new TypeError(
         'In this environment the target of assign MUST be an object. ' +
-        'This error is a performance optimization and not spec compliant.'
-      );
+          'This error is a performance optimization and not spec compliant.',
+      )
     }
   }
 
-  for (var nextIndex = 1; nextIndex < arguments.length; nextIndex++) {
-    var nextSource = arguments[nextIndex];
+  for (let nextIndex = 1; nextIndex < arguments.length; nextIndex++) {
+    const nextSource = arguments[nextIndex]
     if (nextSource == null || nextSource === false) {
-      continue;
+      continue
     }
 
     if (__DEV__) {
-      if (typeof nextSource !== 'object' &&
-          typeof nextSource !== 'function') {
+      if (typeof nextSource !== 'object' && typeof nextSource !== 'function') {
         throw new TypeError(
           'In this environment the sources for assign MUST be an object. ' +
-          'This error is a performance optimization and not spec compliant.'
-        );
+            'This error is a performance optimization and not spec compliant.',
+        )
       }
     }
 
@@ -291,22 +297,21 @@ Object.assign = function(target, sources) {
     // copy cannot throw. If we ever supported this then we must handle
     // exceptions and side-effects.
 
-    for (var key in nextSource) {
+    for (const key in nextSource) {
       if (__DEV__) {
-        var hasOwnProperty = Object.prototype.hasOwnProperty;
+        const hasOwnProperty = Object.prototype.hasOwnProperty
         if (!hasOwnProperty.call(nextSource, key)) {
           throw new TypeError(
             'One of the sources for assign has an enumerable key on the ' +
-            'prototype chain. Are you trying to assign a prototype property? ' +
-            'We don\'t allow it, as this is an edge case that we do not support. ' +
-            'This error is a performance optimization and not spec compliant.'
-          );
+              'prototype chain. Are you trying to assign a prototype property? ' +
+              "We don't allow it, as this is an edge case that we do not support. " +
+              'This error is a performance optimization and not spec compliant.',
+          )
         }
       }
-      target[key] = nextSource[key];
+      target[key] = nextSource[key]
     }
   }
 
-  return target;
-};
-
+  return target
+}

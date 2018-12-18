@@ -47,8 +47,7 @@ function getElementType(
   props: Props,
   getDefault?: () => ReactType,
 ): ReactType {
-
-  var elementType = getElementTypeHelper(Component, props, getDefault)
+  let elementType = getElementTypeHelper(Component, props, getDefault)
   if (elementType === 'div') {
     elementType = RN.View
   } else if (elementType === 'input') {
@@ -69,8 +68,5 @@ function getElementType(
 
   return elementType
 }
-
-
-
 
 export default getElementType

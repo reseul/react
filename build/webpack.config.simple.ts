@@ -61,7 +61,7 @@ const webpackConfig: any = {
     new webpack.HotModuleReplacementPlugin(),
   ],
   output: {
-    filename: 'index.js',
+    filename: 'packedindex.js',
     path: config.compiler_simple_output_path,
     pathinfo: true,
     publicPath: config.compiler_public_path,
