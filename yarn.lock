@@ -3370,6 +3370,13 @@ css-in-js-utils@^2.0.0:
     hyphenate-style-name "^1.0.2"
     isobject "^3.0.1"
 
+css-in-js-utils@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/css-in-js-utils/-/css-in-js-utils-3.0.0.tgz#4379185f5cc79f9eba39b4e795c317f253ffaa40"
+  integrity sha512-FSdC7hZIeSmEPANOZB/VHHeaYh+MiNvqLRP7MWVck6MQs2B5KHH3XmMU9Asb/6BdwDp+JTt1q+cGgSBCuFU1GQ==
+  dependencies:
+    hyphenate-style-name "^1.0.2"
+
 css-select@^1.1.0, css-select@~1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/css-select/-/css-select-1.2.0.tgz#2b3a110539c5355f1cd8d314623e870b121ec858"
@@ -4622,6 +4629,14 @@ fela-dom@^7.0.9:
     fast-loops "^1.0.0"
     fela-utils "^8.0.8"
 
+fela-native@5.0.26:
+  version "5.0.26"
+  resolved "https://registry.yarnpkg.com/fela-native/-/fela-native-5.0.26.tgz#8f03fc7ca3a0011bf2220d2032d39a0884640823"
+  integrity sha512-IUt99rn+dez8PFBC+cY6i5+n3kOhEzUHVpCJ0+GknYTroJyiURVnI9LQXKTs7WPEBE9R7OXgyYCbJhNURQUJzA==
+  dependencies:
+    fast-loops "^1.0.0"
+    fela-utils "^8.1.3"
+
 fela-plugin-custom-property@^7.0.3:
   version "7.0.3"
   resolved "https://registry.yarnpkg.com/fela-plugin-custom-property/-/fela-plugin-custom-property-7.0.3.tgz#2262b13acc6d437955dd731b8f68cf739fb440fc"
@@ -4679,6 +4694,15 @@ fela-utils@^8.0.8:
   integrity sha1-H/t7cmPfYZqZitPQS+rBvhkCeIc=
   dependencies:
     css-in-js-utils "^2.0.0"
+    fast-loops "^1.0.0"
+    string-hash "^1.1.3"
+
+fela-utils@^8.1.3:
+  version "8.1.3"
+  resolved "https://registry.yarnpkg.com/fela-utils/-/fela-utils-8.1.3.tgz#b2b19b410bf646d928362195aff57b34101576e6"
+  integrity sha512-brY7GwWXj+k7SdikEAiUie2oDEBQYRqxxCPyNBdS+/D2jUOvxvLcGCyTytRfOsrQWejzpFDon1VQZqp+qYZgzg==
+  dependencies:
+    css-in-js-utils "^3.0.0"
     fast-loops "^1.0.0"
     string-hash "^1.1.3"
 

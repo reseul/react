@@ -1,6 +1,6 @@
 import { Accessibility, FocusZoneMode } from '../../types'
 import * as keyboardKey from 'keyboard-key'
-import { FocusZoneDirection, IS_FOCUSABLE_ATTRIBUTE } from '../../FocusZone'
+import { FocusZoneDirection /*, IS_FOCUSABLE_ATTRIBUTE */ } from '../../FocusZone'
 
 const CHAT_FOCUSZONE_ATTRIBUTE = 'chat-focuszone'
 
@@ -35,13 +35,13 @@ const ChatBehavior: Accessibility = (props: any) => ({
   },
 })
 
-const getLastTabbableElement = (root: HTMLElement): HTMLElement => {
+const getLastTabbableElement = undefined /*(root: HTMLElement): HTMLElement => {
   const chatItemsElements = root.querySelectorAll(
     `[${CHAT_FOCUSZONE_ATTRIBUTE}] .ui-chat__item > [${IS_FOCUSABLE_ATTRIBUTE}]`,
   )
   return chatItemsElements.length > 0
     ? (chatItemsElements[chatItemsElements.length - 1] as HTMLElement)
     : null
-}
+}*/
 
 export default ChatBehavior

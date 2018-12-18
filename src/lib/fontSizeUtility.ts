@@ -21,3 +21,13 @@ export const pxToRem = (value: number, baseSize?: number): string => {
 
   return `${_.round(convertedValueInRems, 4)}rem`
 }
+
+export const remToPx = (value: string): number => {
+
+  var theNumber = parseFloat(value)
+  if (value.indexOf('rem') >= 0) {
+    theNumber = theNumber * DEFAULT_FONT_SIZE_IN_PX
+  }
+
+  return _.round(theNumber, 0)
+}
