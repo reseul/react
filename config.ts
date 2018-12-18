@@ -56,7 +56,7 @@ const config = {
   // ----------------------------------
   server_host: 'localhost',
   server_port: process.env.PORT || 8080,
-  simple_server_port: 8081,
+  simple_server_port: 8082,
 
   // ----------------------------------
   // Compiler Configuration

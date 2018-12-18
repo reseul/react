@@ -3,7 +3,7 @@
   "include": [
     "src",
     "docs/src",
-    "sample/src",
+    "simple/src",
     "build",
     "gulp",
     "test",

@@ -18,7 +18,7 @@ const webpackConfig: any = {
     vendor: config.compiler_vendor,
   },
   output: {
-    filename: `index.js`,
+    filename: `[name].[${config.compiler_hash_type}].js`,
     path: config.compiler_output_path,
     pathinfo: true,
     publicPath: config.compiler_public_path,
