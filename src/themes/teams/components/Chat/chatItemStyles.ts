@@ -5,8 +5,6 @@ import { ChatItemProps } from '../../../../components/Chat/ChatItem'
 const chatItemStyles: ComponentSlotStylesInput<ChatItemProps, ChatItemVariables> = {
   root: ({ props: p, variables: v }): ICSSInJSStyle => ({
     position: 'relative',
-    display: 'flex',
-    flexDirection: 'row',
     marginTop: v.margin,
     marginBottom: v.margin,
   }),
