@@ -23,13 +23,13 @@ import {
   AccessibilityBehavior,
   AccessibilityDefinition,
   AccessibilityActionHandlers,
-  FocusZoneMode,
+//  FocusZoneMode,
 } from './accessibility/types'
 import { defaultBehavior } from './accessibility'
 import getKeyDownHandlers from './getKeyDownHandlers'
 import { mergeComponentStyles, mergeComponentVariables } from './mergeThemes'
-import { FocusZoneProps, FocusZone, FocusZone as FabricFocusZone } from './accessibility/FocusZone'
-import { FOCUSZONE_WRAP_ATTRIBUTE } from './accessibility/FocusZone/focusUtilities'
+import { /*FocusZoneProps, */FocusZone /*, FocusZone as FabricFocusZone */} from './accessibility/FocusZone'
+//import { FOCUSZONE_WRAP_ATTRIBUTE } from './accessibility/FocusZone/focusUtilities'
 import createAnimationStyles from './createAnimationStyles'
 
 export interface RenderResultConfig<P> {
@@ -82,7 +82,7 @@ const getAccessibility = (
  * Should the FocusZone implementation change at any time, this function should provide a compile-time guarantee
  * that the new implementation is backwards compatible with the old implementation.
  */
-function wrapInGenericFocusZone<
+/*function wrapInGenericFocusZone<
   COMPONENT_PROPS extends FocusZoneProps,
   PROPS extends COMPONENT_PROPS,
   COMPONENT extends FocusZone & React.Component<COMPONENT_PROPS>
@@ -99,6 +99,7 @@ function wrapInGenericFocusZone<
     </FocusZone>
   )
 }
+
 
 const renderWithFocusZone = (render, focusZoneDefinition, config, focusZoneRef): any => {
   if (focusZoneDefinition.mode === FocusZoneMode.Wrap) {
@@ -117,7 +118,7 @@ const renderWithFocusZone = (render, focusZoneDefinition, config, focusZoneRef):
     config.rest.ref = focusZoneRef
   }
   return render(config)
-}
+}*/
 
 const renderComponent = <P extends {}>(config: RenderConfig<P>): React.ReactElement<P> => {
   const {
@@ -128,7 +129,7 @@ const renderComponent = <P extends {}>(config: RenderConfig<P>): React.ReactElem
     props,
     state,
     actionHandlers,
-    focusZoneRef,
+//    focusZoneRef,
     render,
   } = config
 
@@ -207,9 +208,9 @@ const renderComponent = <P extends {}>(config: RenderConfig<P>): React.ReactElem
           theme,
         }
 
-        if (accessibility.focusZone) {
+/*        if (accessibility.focusZone) {
           return renderWithFocusZone(render, accessibility.focusZone, config, focusZoneRef)
-        }
+        }*/
 
         return render(config)
       }}

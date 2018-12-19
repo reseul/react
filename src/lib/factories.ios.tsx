@@ -189,7 +189,7 @@ function createShorthandFromValue(
 
   // Merge style
   if (defaultProps.style || overrideProps.style || usersProps.style) {
-    props.style = { ...defaultProps.style, ...usersProps.style, ...overrideProps.style }
+    props.style = [defaultProps.style, usersProps.style, overrideProps.style ]
   }
 
   // Merge styles

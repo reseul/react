@@ -3,9 +3,17 @@ import * as PropTypes from 'prop-types'
 import * as React from 'react'
 import { Provider as RendererProvider, ThemeProvider } from 'react-fela'
 
-import { mergeThemes } from '../../lib'
-import { ThemePrepared, ThemeInput } from '../../themes/types'
+import { felaRenderer as felaLtrRenderer, mergeThemes } from '../../lib'
+import {
+  ThemePrepared,
+  ThemeInput,
+  StaticStyleObject,
+  StaticStyle,
+  StaticStyleFunction,
+  FontFace,
+} from '../../themes/types'
 import ProviderConsumer from './ProviderConsumer'
+import { mergeSiteVariables } from '../../lib/mergeThemes'
 
 export interface ProviderProps {
   theme: ThemeInput
@@ -48,6 +56,65 @@ class Provider extends React.Component<ProviderProps> {
 
   static Consumer = ProviderConsumer
 
+  renderStaticStyles = (mergedTheme: ThemePrepared) => {
+    // RTL WARNING
+    // This function sets static styles which are global and renderer agnostic
+    // With current implementation, static styles cannot differ between LTR and RTL
+    // @see http://fela.js.org/docs/advanced/StaticStyle.html for details
+
+    const { siteVariables } = mergedTheme
+    const { staticStyles } = this.props.theme
+
+    if (!staticStyles) return
+
+    const renderObject = (object: StaticStyleObject) => {
+      _.forEach(object, (style, selector) => {
+        felaLtrRenderer.renderStatic(style, selector)
+      })
+    }
+
+    staticStyles.forEach((staticStyle: StaticStyle) => {
+      if (typeof staticStyle === 'string') {
+        felaLtrRenderer.renderStatic(staticStyle)
+      } else if (_.isPlainObject(staticStyle)) {
+        renderObject(staticStyle as StaticStyleObject)
+      } else if (_.isFunction(staticStyle)) {
+        const preparedSiteVariables = mergeSiteVariables(siteVariables)
+        renderObject((staticStyle as StaticStyleFunction)(preparedSiteVariables))
+      } else {
+        throw new Error(
+          `staticStyles array must contain CSS strings, style objects, or style functions, got: ${typeof staticStyle}`,
+        )
+      }
+    })
+  }
+
+  renderFontFaces = () => {
+    // RTL WARNING
+    // This function sets static styles which are global and renderer agnostic
+    // With current implementation, static styles cannot differ between LTR and RTL
+    // @see http://fela.js.org/docs/advanced/StaticStyle.html for details
+
+    const { fontFaces } = this.props.theme
+
+    if (!fontFaces) return
+
+    const renderFontObject = (font: FontFace) => {
+      if (!_.isPlainObject(font)) {
+        throw new Error(`fontFaces must be objects, got: ${typeof font}`)
+      }
+      felaLtrRenderer.renderFont(font.name, font.paths, font.style)
+    }
+
+    fontFaces.forEach((font: FontFace) => {
+      renderFontObject(font)
+    })
+  }
+
+  componentDidMount() {
+    this.renderFontFaces()
+  }
+
   render() {
     const { theme, children } = this.props
 
@@ -57,6 +124,7 @@ class Provider extends React.Component<ProviderProps> {
       <ProviderConsumer
         render={(incomingTheme: ThemePrepared) => {
           const outgoingTheme: ThemePrepared = mergeThemes(incomingTheme, theme)
+          this.renderStaticStylesOnce(outgoingTheme)
           return (
             <RendererProvider renderer={outgoingTheme.renderer} {...{ rehydrate: false }}>
               <ThemeProvider theme={outgoingTheme}>{children}</ThemeProvider>
@@ -65,6 +133,14 @@ class Provider extends React.Component<ProviderProps> {
         }}
       />
     )
+  }
+
+  renderStaticStylesOnce = (mergedTheme: ThemePrepared) => {
+    const { staticStyles } = this.props.theme
+    if (!this.staticStylesRendered && staticStyles) {
+      this.renderStaticStyles(mergedTheme)
+      this.staticStylesRendered = true
+    }
   }
 }
 

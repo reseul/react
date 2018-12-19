@@ -24,7 +24,8 @@ export const pxToRem = (value: number, baseSize?: number): string => {
 
 export const remToPx = (value: string): number => {
   let theNumber = parseFloat(value)
-  if (value.indexOf('rem') >= 0) {
+  // hack
+  if (value.indexOf('rem') >= 0 || value.indexOf('rem') >= 0) {
     theNumber = theNumber * DEFAULT_FONT_SIZE_IN_PX
   }
 

@@ -1,6 +1,7 @@
 import * as historyApiFallback from 'connect-history-api-fallback'
 import * as express from 'express'
 import { task, series } from 'gulp'
+import * as ts from 'gulp-typescript'
 import * as rimraf from 'rimraf'
 import * as webpack from 'webpack'
 import * as WebpackDevMiddleware from 'webpack-dev-middleware'
@@ -11,6 +12,9 @@ import config from '../../../config'
 const { paths } = config
 const g = require('gulp-load-plugins')()
 const { colors, log, PluginError } = g.util
+const gulp = require('gulp')
+
+var tsProject = ts.createProject('build/tsconfig.simple.json')
 
 // ----------------------------------------
 // Clean
@@ -25,6 +29,12 @@ task('clean:simple', cb => {
 // ----------------------------------------
 
 task('build:simple', cb => {
+
+  gulp.src(config.paths.simpleSrc('*'))
+    .pipe(tsProject())
+    .js
+    .pipe(gulp.dest(config.paths.simpleDist()))
+
   const webpackConfig = require('../../webpack.config.simple').default
   const compiler = webpack(webpackConfig)
 
@@ -45,7 +55,7 @@ task('build:simple', cb => {
       throw new PluginError('webpack', warnings.toString())
     }
 
-    cb(err)
+    cb()
   })
 })
 

@@ -1,4 +1,3 @@
-const CleanWebpackPlugin = require('clean-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const webpack = require('webpack')
 
@@ -49,12 +48,11 @@ const webpackConfig: any = {
     alias: {
       '@stardust-ui/react': paths.src(),
       src: paths.src(),
-      docs: paths.base('simple'),
+      simple: paths.base('simple'),
       'package.json': paths.base('package.json'),
     },
   },
   plugins: [
-    new CleanWebpackPlugin(['dist']),
     new HtmlWebpackPlugin({
       title: 'Stardust Sample',
     }),
