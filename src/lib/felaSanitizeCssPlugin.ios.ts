@@ -210,26 +210,27 @@ export default (config?: { skip?: string[] }) => {
           cssPropertyValue = 'flex'
         }
         if (cssPropertyName === 'gridTemplateRows') {
-          cssPropertyName = 'flexDirection'
-          cssPropertyValue = 'column'
-        } else if (cssPropertyName === 'gridTemplateColumns') {
-          cssPropertyName = 'flexDirection'
-          cssPropertyValue = 'row'
+          processedStyles['flexDirection'] = 'column'
+          return
+        }
+        if (cssPropertyName === 'gridTemplateColumns') {
+          processedStyles['flexDirection'] = 'row'
+          return
         }
 
         // lineHeight hack (with big limitations)
-        if (cssPropertyName === "lineHeight" ) {
+        if (cssPropertyName === 'lineHeight') {
           // lineHeight is a multiplier
-          const fontSize = styles["fontSize"]
+          const fontSize = styles['fontSize']
           if (fontSize) {
-              // We have a fontSize
-              let fontSizeInPx;
-              if (typeof fontSize === "string") {
-                fontSizeInPx = remToPx(fontSize)
-              } else {
-                fontSizeInPx = fontSize
-              }
-              processedStyles["lineHeight"] = cssPropertyValue * fontSizeInPx
+            // We have a fontSize
+            let fontSizeInPx
+            if (typeof fontSize === 'string') {
+              fontSizeInPx = remToPx(fontSize)
+            } else {
+              fontSizeInPx = fontSize
+            }
+            processedStyles['lineHeight'] = cssPropertyValue * fontSizeInPx
           }
           return
         }
@@ -259,35 +260,38 @@ export default (config?: { skip?: string[] }) => {
         ) {
           const parts = cssPropertyValue.split(' ')
           if (parts.length === 4) {
-            processedStyles[cssPropertyName + 'Left'] = remToPx(parts[0])
-            processedStyles[cssPropertyName + 'Top'] = remToPx(parts[1])
-            processedStyles[cssPropertyName + 'Right'] = remToPx(parts[2])
-            processedStyles[cssPropertyName + 'Bottom'] = remToPx(parts[3])
+            processedStyles[`${cssPropertyName}Left`] = remToPx(parts[0])
+            processedStyles[`${cssPropertyName}Top`] = remToPx(parts[1])
+            processedStyles[`${cssPropertyName}Right`] = remToPx(parts[2])
+            processedStyles[`${cssPropertyName}Bottom`] = remToPx(parts[3])
             return
-          } else if (parts.length === 1) {
-            processedStyles[cssPropertyName + 'Left'] =
-            processedStyles[cssPropertyName + 'Top'] =
-            processedStyles[cssPropertyName + 'Right'] =
-            processedStyles[cssPropertyName + 'Bottom'] =
-            remToPx(parts[0])
+          }
+          if (parts.length === 1) {
+            processedStyles[`${cssPropertyName}Left`] = processedStyles[
+              `${cssPropertyName}Top`
+            ] = processedStyles[`${cssPropertyName}Right`] = processedStyles[
+              `${cssPropertyName}Bottom`
+            ] = remToPx(parts[0])
             return
-          } else if (parts.length === 2) {
-            processedStyles[cssPropertyName + 'Top'] =
-            processedStyles[cssPropertyName + 'Bottom'] =
-            remToPx(parts[0])
+          }
+          if (parts.length === 2) {
+            processedStyles[`${cssPropertyName}Top`] = processedStyles[
+              `${cssPropertyName}Bottom`
+            ] = remToPx(parts[0])
 
-            processedStyles[cssPropertyName + 'Left'] =
-            processedStyles[cssPropertyName + 'Right'] =
-            remToPx(parts[1])
+            processedStyles[`${cssPropertyName}Left`] = processedStyles[
+              `${cssPropertyName}Right`
+            ] = remToPx(parts[1])
             return
-          } else if (parts.length === 3) {
-            processedStyles[cssPropertyName + 'Top'] = remToPx(parts[0])
+          }
+          if (parts.length === 3) {
+            processedStyles[`${cssPropertyName}Top`] = remToPx(parts[0])
 
-            processedStyles[cssPropertyName + 'Left'] =
-            processedStyles[cssPropertyName + 'Right'] =
-            remToPx(parts[1])
+            processedStyles[`${cssPropertyName}Left`] = processedStyles[
+              `${cssPropertyName}Right`
+            ] = remToPx(parts[1])
 
-            processedStyles[cssPropertyName + 'Bottom'] = remToPx(parts[2])
+            processedStyles[`${cssPropertyName}Bottom`] = remToPx(parts[2])
             return
           }
         }
@@ -306,4 +310,3 @@ export default (config?: { skip?: string[] }) => {
 
   return sanitizeCssStyleObject
 }
-

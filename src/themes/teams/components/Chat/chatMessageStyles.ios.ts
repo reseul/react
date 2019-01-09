@@ -26,7 +26,7 @@ const chatMessageStyles: ComponentSlotStylesInput<ChatMessageProps, ChatMessageV
 
   content: ({ variables: v }): ICSSInJSStyle => ({
     color: v.color,
-//    display: 'block',
+    //    display: 'block',
     fontSize: '1rem',
     '& a:focus': {
       outline: 'none',

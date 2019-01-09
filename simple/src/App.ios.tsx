@@ -22,7 +22,7 @@ export default () => (
         </Chat.Item>
       </Chat>
       <Input placeholder="Type a message here" />
-      <Layout vertical = { false }>
+      <Layout vertical={false}>
         <Button content="Send" primary />
         <Button content="Receive" secondary />
       </Layout>
