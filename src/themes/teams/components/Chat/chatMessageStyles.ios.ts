@@ -8,7 +8,6 @@ const chatMessageStyles: ComponentSlotStylesInput<ChatMessageProps, ChatMessageV
     flexDirection: 'column',
     padding: v.padding,
     borderRadius: v.borderRadius,
-    color: v.color,
     backgroundColor: p.mine ? v.backgroundColorMine : v.backgroundColor,
     maxWidth: v.width,
     wordBreak: 'break-word',
@@ -20,12 +19,14 @@ const chatMessageStyles: ComponentSlotStylesInput<ChatMessageProps, ChatMessageV
   }),
 
   author: ({ props: p, variables: v }): ICSSInJSStyle => ({
+    color: v.color,
     display: p.mine ? 'none' : undefined,
     marginRight: v.authorMargin,
   }),
 
   content: ({ variables: v }): ICSSInJSStyle => ({
-    display: 'block',
+    color: v.color,
+//    display: 'block',
     fontSize: '1rem',
     '& a:focus': {
       outline: 'none',

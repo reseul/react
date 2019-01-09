@@ -4,7 +4,6 @@ import { Button, Chat, Header, Input, Layout, Provider, themes } from '@stardust
 export default () => (
   <Provider theme={themes.teams}>
     <Layout vertical>
-      <Header as="h1" content="" />
       <Header as="h1" content="Hello World Chart" />
       <Chat>
         <Chat.Item>
@@ -22,9 +21,10 @@ export default () => (
           />
         </Chat.Item>
       </Chat>
-      <Layout>
-        <Input placeholder="Type a message here" />
+      <Input placeholder="Type a message here" />
+      <Layout vertical = { false }>
         <Button content="Send" primary />
+        <Button content="Receive" secondary />
       </Layout>
     </Layout>
   </Provider>

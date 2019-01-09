@@ -97,7 +97,7 @@ class ChatMessage extends UIComponent<Extendable<ChatMessageProps>, any> {
             {Text.create(timestamp, {
               defaultProps: { size: 'small', styles: styles.timestamp, timestamp: true },
             })}
-            {Slot.create(content, { defaultProps: { styles: styles.content } })}
+            {Slot.create(content, { defaultProps: { as: 'span', styles: styles.content } })}
           </>
         )}
       </ElementType>

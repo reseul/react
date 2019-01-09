@@ -217,6 +217,23 @@ export default (config?: { skip?: string[] }) => {
           cssPropertyValue = 'row'
         }
 
+        // lineHeight hack (with big limitations)
+        if (cssPropertyName === "lineHeight" ) {
+          // lineHeight is a multiplier
+          const fontSize = styles["fontSize"]
+          if (fontSize) {
+              // We have a fontSize
+              let fontSizeInPx;
+              if (typeof fontSize === "string") {
+                fontSizeInPx = remToPx(fontSize)
+              } else {
+                fontSizeInPx = fontSize
+              }
+              processedStyles["lineHeight"] = cssPropertyValue * fontSizeInPx
+          }
+          return
+        }
+
         // Ignore some fluff
         if (cssPropertyName === 'flex' && cssPropertyValue === 'none') {
           return
@@ -229,7 +246,10 @@ export default (config?: { skip?: string[] }) => {
           ) &&
           typeof cssPropertyValue === 'string'
         ) {
-          cssPropertyValue = remToPx(cssPropertyValue)
+          // Leave percentages as is
+          if (cssPropertyValue.indexOf('%') < 0) {
+            cssPropertyValue = remToPx(cssPropertyValue)
+          }
         }
 
         // Margin and padding

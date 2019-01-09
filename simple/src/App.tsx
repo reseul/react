@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Button, Header, Input, Layout, Chat, Provider, themes } from '@stardust-ui/react'
+import { Button, Chat, Header, Input, Layout, Provider, themes } from '@stardust-ui/react'
 
 export default () => (
   <Provider theme={themes.teams}>
@@ -21,9 +21,10 @@ export default () => (
           />
         </Chat.Item>
       </Chat>
-      <Layout>
-        <Input placeholder="Type a message here" />
+      <Input placeholder="Type a message here" />
+      <Layout vertical = { false }>
         <Button content="Send" primary />
+        <Button content="Receive" secondary />
       </Layout>
     </Layout>
   </Provider>
