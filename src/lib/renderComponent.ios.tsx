@@ -23,13 +23,15 @@ import {
   AccessibilityBehavior,
   AccessibilityDefinition,
   AccessibilityActionHandlers,
-//  FocusZoneMode,
+  //  FocusZoneMode,
 } from './accessibility/types'
 import { defaultBehavior } from './accessibility'
 import getKeyDownHandlers from './getKeyDownHandlers'
 import { mergeComponentStyles, mergeComponentVariables } from './mergeThemes'
-import { /*FocusZoneProps, */FocusZone /*, FocusZone as FabricFocusZone */} from './accessibility/FocusZone'
-//import { FOCUSZONE_WRAP_ATTRIBUTE } from './accessibility/FocusZone/focusUtilities'
+import {
+  /*FocusZoneProps, */ FocusZone /*, FocusZone as FabricFocusZone */,
+} from './accessibility/FocusZone'
+// import { FOCUSZONE_WRAP_ATTRIBUTE } from './accessibility/FocusZone/focusUtilities'
 import createAnimationStyles from './createAnimationStyles'
 
 export interface RenderResultConfig<P> {
@@ -100,7 +102,6 @@ const getAccessibility = (
   )
 }
 
-
 const renderWithFocusZone = (render, focusZoneDefinition, config, focusZoneRef): any => {
   if (focusZoneDefinition.mode === FocusZoneMode.Wrap) {
     return wrapInGenericFocusZone(
@@ -129,7 +130,7 @@ const renderComponent = <P extends {}>(config: RenderConfig<P>): React.ReactElem
     props,
     state,
     actionHandlers,
-//    focusZoneRef,
+    //    focusZoneRef,
     render,
   } = config
 
@@ -191,6 +192,10 @@ const renderComponent = <P extends {}>(config: RenderConfig<P>): React.ReactElem
 
         const classes: ComponentSlotClasses = getClasses(renderer, mergedStyles, styleParam)
         // classes.root = cx(className, classes.root, props.className)
+        // SERIOUS HACK
+        if (_.isEmpty(mergedStyles.root) && typeof props.className === 'string') {
+          classes.root = parseInt(props.className, 10) as any
+        }
 
         rest = {
           ...rest,
@@ -208,7 +213,7 @@ const renderComponent = <P extends {}>(config: RenderConfig<P>): React.ReactElem
           theme,
         }
 
-/*        if (accessibility.focusZone) {
+        /*        if (accessibility.focusZone) {
           return renderWithFocusZone(render, accessibility.focusZone, config, focusZoneRef)
         }*/
 
