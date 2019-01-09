@@ -11,7 +11,7 @@ const sh = (command: string, pipeOutputToResult: boolean = false): Promise<strin
       shell: true,
     }
 
-    const child = spawn(cmd, args, options)
+    const child = spawn(cmd, args, options as any)
 
     let stdoutData = ''
 
