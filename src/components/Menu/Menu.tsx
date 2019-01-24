@@ -11,13 +11,14 @@ import {
   ChildrenComponentProps,
   commonPropTypes,
   getKindProp,
+  rtlTextContainer,
 } from '../../lib'
 import MenuItem from './MenuItem'
 import { menuBehavior } from '../../lib/accessibility'
 import { Accessibility } from '../../lib/accessibility/types'
 
 import { ComponentVariablesObject } from '../../themes/types'
-import { ReactProps, ShorthandCollection } from '../../../types/utils'
+import { ReactProps, ShorthandCollection, ShorthandValue } from '../../../types/utils'
 import MenuDivider from './MenuDivider'
 
 export type MenuShorthandKinds = 'divider' | 'item'
@@ -68,6 +69,9 @@ export interface MenuProps extends UIComponentProps, ChildrenComponentProps {
 
   /** Indicates whether the menu is submenu. */
   submenu?: boolean
+
+  /** Shorthand for the submenu indicator. */
+  indicator?: ShorthandValue
 }
 
 export interface MenuState {
@@ -103,6 +107,7 @@ class Menu extends AutoControlledComponent<ReactProps<MenuProps>, MenuState> {
     underlined: PropTypes.bool,
     vertical: PropTypes.bool,
     submenu: PropTypes.bool,
+    indicator: customPropTypes.itemShorthand,
   }
 
   static defaultProps = {
@@ -145,6 +150,7 @@ class Menu extends AutoControlledComponent<ReactProps<MenuProps>, MenuState> {
       underlined,
       vertical,
       submenu,
+      indicator,
     } = this.props
     const { activeIndex } = this.state
 
@@ -177,16 +183,22 @@ class Menu extends AutoControlledComponent<ReactProps<MenuProps>, MenuState> {
           index,
           active,
           inSubmenu: submenu,
+          indicator,
         },
         overrideProps: this.handleItemOverrides,
       })
     })
   }
 
-  renderComponent({ ElementType, classes, accessibility, variables, rest }) {
+  renderComponent({ ElementType, classes, accessibility, variables, unhandledProps }) {
     const { children } = this.props
     return (
-      <ElementType {...accessibility.attributes.root} {...rest} className={classes.root}>
+      <ElementType
+        {...accessibility.attributes.root}
+        {...rtlTextContainer.getAttributes({ forElements: [children] })}
+        {...unhandledProps}
+        className={classes.root}
+      >
         {childrenExist(children) ? children : this.renderItems(variables)}
       </ElementType>
     )

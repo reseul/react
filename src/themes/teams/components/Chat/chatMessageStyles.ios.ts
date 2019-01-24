@@ -12,10 +12,13 @@ const chatMessageStyles: ComponentSlotStylesInput<ChatMessageProps, ChatMessageV
     maxWidth: v.width,
     wordBreak: 'break-word',
     wordWrap: 'break-word',
+    //    outline: 0,
     ...(p.mine && { alignSelf: 'flex-end' }),
-    ':focus': {
-      outline: `.2rem solid ${v.contentFocusOutlineColor}`,
-    },
+    ...(p.isFromKeyboard && {
+      ':focus': {
+        outline: `.2rem solid ${v.contentFocusOutlineColor}`,
+      },
+    }),
   }),
 
   author: ({ props: p, variables: v }): ICSSInJSStyle => ({

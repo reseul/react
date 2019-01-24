@@ -34,13 +34,14 @@ import {
 } from './accessibility/FocusZone'
 // import { FOCUSZONE_WRAP_ATTRIBUTE } from './accessibility/FocusZone/focusUtilities'
 import createAnimationStyles from './createAnimationStyles'
+import { generateColorScheme } from './index'
 
 export interface RenderResultConfig<P> {
   // TODO: Switch back to React.ReactType after issue will be resolved
   // https://github.com/Microsoft/TypeScript/issues/28768
   ElementType: React.ComponentType<P> | string
   classes: ComponentSlotClasses
-  rest: Props
+  unhandledProps: Props
   variables: ComponentVariablesObject
   styles: ComponentSlotStylesPrepared
   accessibility: AccessibilityBehavior
@@ -131,10 +132,10 @@ const renderWithFocusZone = <P extends {}>(
   if (focusZoneDefinition.mode === FocusZoneMode.Embed) {
     const originalElementType = config.ElementType
     config.ElementType = FabricFocusZone as any
-    config.rest = { ...config.rest, ...focusZoneDefinition.props }
-    config.rest.as = originalElementType
-    config.rest.ref = focusZoneRef
-    config.rest.isRtl = config.rtl
+    config.unhandledProps = { ...config.unhandledProps, ...focusZoneDefinition.props }
+    config.unhandledProps.as = originalElementType
+    config.unhandledProps.ref = focusZoneRef
+    config.unhandledProps.isRtl = config.rtl
   }
   return render(config)
 }*/
@@ -160,7 +161,14 @@ const renderComponent = <P extends {}>(config: RenderConfig<P>): React.ReactElem
         }
 
         const {
-          siteVariables = { fontSizes: {} },
+          siteVariables = {
+            colorScheme: {},
+            colors: {},
+            contextualColors: {},
+            emphasisColors: {},
+            naturalColors: {},
+            fontSizes: {},
+          },
           componentVariables = {},
           componentStyles = {},
           rtl = false,
@@ -187,20 +195,25 @@ const renderComponent = <P extends {}>(config: RenderConfig<P>): React.ReactElem
             root: props.styles,
           },
         )
+
         const accessibility: AccessibilityBehavior = getAccessibility(
           stateAndProps,
           actionHandlers,
           rtl,
         )
 
-        let rest = getUnhandledProps(
+        let unhandledProps = getUnhandledProps(
           { handledProps: [...handledProps, ...accessibility.handledProps] },
           props,
         )
+
+        const colors = generateColorScheme(stateAndProps.color, resolvedVariables.colorScheme)
+
         const styleParam: ComponentStyleFunctionParam = {
           props: stateAndProps,
           variables: resolvedVariables,
           theme,
+          colors,
         }
 
         mergedStyles.root = {
@@ -220,14 +233,14 @@ const renderComponent = <P extends {}>(config: RenderConfig<P>): React.ReactElem
           classes.root = parseInt(props.className, 10) as any
         }
 
-        rest = {
-          ...rest,
+        unhandledProps = {
+          ...unhandledProps,
           style: classes.root,
         }
 
         const config: RenderResultConfig<P> = {
           ElementType,
-          rest,
+          unhandledProps,
           classes,
           variables: resolvedVariables,
           styles: resolvedStyles,
