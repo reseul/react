@@ -24,7 +24,12 @@ const chatMessageStyles: ComponentSlotStylesInput<ChatMessageProps, ChatMessageV
   author: ({ props: p, variables: v }): ICSSInJSStyle => ({
     color: v.color,
     display: p.mine ? 'none' : undefined,
-    marginRight: v.authorMargin,
+    marginRight: v.authorMarginRight,
+    marginBottom: v.headerMarginBottom,
+  }),
+
+  timestamp: ({ variables: v }) => ({
+    marginBottom: v.headerMarginBottom,
   }),
 
   content: ({ variables: v }): ICSSInJSStyle => ({

@@ -100,7 +100,7 @@ function createShorthandFromValue(
   Component: React.ReactType,
   mappedProp?: string,
   value?: ShorthandValue,
-  options: CreateShorthandOptions = CREATE_SHORTHAND_DEFAULT_OPTIONS,
+  options?: CreateShorthandOptions,
 ) {
   if (typeof Component !== 'function' && typeof Component !== 'string') {
     throw new Error('createShorthand() Component must be a string or function.')

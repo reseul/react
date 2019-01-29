@@ -1,7 +1,7 @@
 import * as _ from 'lodash'
 import * as PropTypes from 'prop-types'
 import * as React from 'react'
-import { Provider as RendererProvider, ThemeProvider } from 'react-fela'
+import { RendererProvider, ThemeProvider } from 'react-fela'
 
 import { mergeThemes } from '../../lib'
 import { ThemePrepared, ThemeInput } from '../../themes/types'
